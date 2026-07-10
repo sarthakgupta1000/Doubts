@@ -132,6 +132,24 @@ Define the **defect space** $N:=R^{\perp_\Omega}=\{v\in V:\Omega(v,r)=0\ \forall
    $V\hookrightarrow W,\ v\mapsto(v;0,0,\dots)$ is an isometric symplectic embedding onto
    the symplectic subspace $V\oplus0$.
 
+### Completeness of $W$
+
+$W$ is the $\ell^2$‑direct sum of the complete spaces $V$ and $N_k$ ($N_k$ is an isometric
+copy of $N=R^{\perp_\Omega}$, a **closed** subspace of $V$ by Step 3, hence complete). Such
+a direct sum is complete:
+
+1. Let $(u^{(m)})_m$ be Cauchy in $W$, $u^{(m)}=(v^{(m)};n^{(m)}_1,n^{(m)}_2,\dots)$.
+2. Each coordinate projection is a contraction, so every coordinate sequence is Cauchy and
+   converges: $v^{(m)}\to v$ in $V$, $n^{(m)}_k\to n_k$ in $N_k$. Set $u:=(v;n_1,n_2,\dots)$.
+3. For every finite $K$ and $m,l\ge M(\varepsilon)$,
+   $\|v^{(m)}-v^{(l)}\|^2+\sum_{k\le K}\|n^{(m)}_k-n^{(l)}_k\|^2\le\|u^{(m)}-u^{(l)}\|^2<\varepsilon^2$.
+4. Let $l\to\infty$: $\|v^{(m)}-v\|^2+\sum_{k\le K}\|n^{(m)}_k-n_k\|^2\le\varepsilon^2$.
+5. Valid for all $K$, so $\|u^{(m)}-u\|^2\le\varepsilon^2$; thus $u^{(m)}-u\in W$, hence
+   $u\in W$, and $u^{(m)}\to u$.
+
+So $W$ is a Hilbert space. Completeness is exactly what lets the bounded‑inverse theorem
+apply in Step 5(f), making $\tilde T^{-1}$ automatically bounded.
+
 ---
 
 ## Step 5 — The extension $\tilde T$ and its verification
