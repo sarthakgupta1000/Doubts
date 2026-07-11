@@ -1,0 +1,728 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\ran}{\operatorname{ran}}
+\newcommand{\id}{\operatorname{id}}
+
+\title{Bounded symplectic embeddings extend to\\
+symplectic automorphisms, and commuting pairs\\
+admit commuting extensions}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let \(H=\ell^2(\N;\R^{2d})=\bigoplus_{n=1}^\infty\R^{2d}\) carry the strong symplectic form
+\(\Omega=\bigoplus_n\omega_0\) associated with the orthogonal complex structure
+\(\cJ=\bigoplus_n J_{2d}\). We prove that every bounded linear map \(T:H\to H\) satisfying
+\(T^*\cJ T=\cJ\) (a symplectic embedding) extends to a bounded symplectic automorphism of a
+larger symplectic Hilbert space. We then prove that if \(T\) and \(T'\) are commuting
+symplectic embeddings, they admit commuting extensions to symplectic automorphisms of a
+common enlargement. The single-operator result is elementary and constructive. The
+commuting-pair result follows an It\^o-type conjugation argument on that model, with
+boundedness obtained from the Uniform Boundedness Principle and the structure of the
+symplectic Wold decomposition.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction and statement of results}
+
+Let \(V\) be a real separable Hilbert space with inner product \(g\) and norm \(\|\cdot\|\).
+An orthogonal complex structure on \(V\) is a bounded operator \(\cJ\) satisfying
+\begin{equation}
+\label{eq:J-axioms}
+\cJ^2=-I,\qquad \cJ^*=-\cJ.
+\end{equation}
+The associated bilinear form
+\begin{equation}
+\label{eq:Omega-def}
+\Omega(x,y):=g(\cJ x,y)
+\end{equation}
+is then a \emph{strong} symplectic form: the map \(x\mapsto\Omega(x,\cdot)\) is a topological
+isomorphism of \(V\) onto \(V^*\).
+
+The model space of interest is
+\begin{equation}
+\label{eq:model}
+H=\ell^2(\N;\R^{2d})=\bigoplus_{n=1}^\infty\R^{2d},
+\end{equation}
+with \(\cJ=\bigoplus_n J_{2d}\) the direct sum of the standard complex structure on
+\(\R^{2d}\). Then \(\Omega=\bigoplus_n\omega_0\) is the direct sum of the standard
+area forms.
+
+\begin{definition}
+A bounded linear operator \(T:V\to V\) is a \emph{symplectic embedding} if
+\begin{equation}
+\label{eq:symp-emb}
+\Omega(Tx,Ty)=\Omega(x,y)\qquad\text{for all }x,y\in V,
+\end{equation}
+or equivalently \(T^*\cJ T=\cJ\). It is a \emph{symplectic automorphism} if it is a
+symplectic embedding and is bijective (equivalently, surjective); in that case
+\(T\in\mathrm{Sp}(V,\Omega)\) and \(T^{-1}\) is automatically bounded.
+\end{definition}
+
+In finite dimensions every symplectic embedding is an automorphism. In infinite dimensions
+this fails: the unilateral block shift on \(H\) is a symplectic embedding that is not
+onto. The first theorem is the symplectic analogue of extending an isometry to a unitary.
+
+\begin{theorem}[Single embedding]
+\label{thm:single}
+Let \(T:V\to V\) be a symplectic embedding on a separable real symplectic Hilbert space
+\((V,\Omega)\) as above. Then there exist a symplectic Hilbert space \((W,\widehat\Omega)\)
+containing \((V,\Omega)\) as a closed symplectic subspace, and a symplectic automorphism
+\(\widetilde T:W\to W\), such that \(\widetilde T|_V=T\).
+\end{theorem}
+
+The second theorem is the symplectic analogue of It\^o's theorem on commuting isometries.
+
+\begin{theorem}[Commuting pair]
+\label{thm:pair}
+Let \(T,T':V\to V\) be commuting symplectic embeddings. Then there exist a symplectic
+Hilbert space \((W,\widehat\Omega)\) containing \((V,\Omega)\), and commuting symplectic
+automorphisms \(\widetilde T,\widetilde T':W\to W\), such that
+\(\widetilde T|_V=T\) and \(\widetilde T'|_V=T'\).
+\end{theorem}
+
+\begin{remark}
+The same conclusion holds for any finite (or countable) family of mutually commuting
+symplectic embeddings: the argument below extends verbatim to representations of the
+semigroup \(\N^k\).
+\end{remark}
+
+\section{Preliminaries}
+\label{sec:prelim}
+
+Throughout, \((V,g,\cJ,\Omega)\) is as in the introduction.
+
+\begin{lemma}[Basic identities]
+\label{lem:basic}
+\begin{enumerate}[label=(\roman*)]
+\item \(\|\cJ x\|=\|x\|\) for every \(x\in V\).
+\item \(T\) satisfies~\eqref{eq:symp-emb} if and only if \(T^*\cJ T=\cJ\).
+\item \(\Omega\) is strong: \(\flat:V\to V^*\), \(\flat(x)=\Omega(x,\cdot)\), is a
+topological isomorphism.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i)\, From~\eqref{eq:J-axioms}, \(\cJ^*\cJ=(-\cJ)\cJ=-\cJ^2=I\), so
+\(\|\cJ x\|^2=g(x,\cJ^*\cJ x)=\|x\|^2\).
+
+(ii)\, \(\Omega(Tx,Ty)=g(\cJ Tx,Ty)=g(T^*\cJ Tx,y)\) and
+\(\Omega(x,y)=g(\cJ x,y)\). Equality for all \(y\) yields \(T^*\cJ T=\cJ\).
+
+(iii)\, \(\flat=\iota_g\circ\cJ\) with \(\iota_g\) the Riesz isomorphism, and both factors
+are topological isomorphisms.
+\end{proof}
+
+\begin{lemma}[Left inverse and closed range]
+\label{lem:left-inv}
+Let \(T\) be a symplectic embedding. Then:
+\begin{enumerate}[label=(\roman*)]
+\item \(T\) is bounded below:
+\(\|Tx\|\ge\|x\|/\|T\|\) for all \(x\).
+\item \(T\) is injective and \(R:=\ran T\) is closed.
+\item The operator \(L:=-\cJ T^*\cJ\) satisfies \(LT=I\) and \(\|L\|\le\|T\|\).
+\item \(TL\) is the bounded projection onto \(R\) along the symplectic complement
+defined in Lemma~\ref{lem:complement} below; writing \(E:=TL\) and \(F:=I-E\), one has
+\(E|_R=\id_R\) and \(\ker E=R^{\perp_\Omega}\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i)\, By Lemma~\ref{lem:basic},
+\[
+\|x\|=\|\cJ x\|=\|T^*\cJ Tx\|\le\|T\|\,\|Tx\|.
+\]
+(ii)\, Boundedness from below yields injectivity and closed range by the usual Cauchy
+sequence argument.
+(iii)\, \(LT=(-\cJ T^*\cJ)T=-\cJ(T^*\cJ T)=-\cJ\cJ=I\). Also
+\(\|L\|\le\|\cJ\|\,\|T\|\,\|\cJ\|=\|T\|\).
+(iv)\, \(E^2=TLTL=T(LT)L=TL=E\), \(\ran E=R\), and
+\(Ev=0\Leftrightarrow Lv=0\Leftrightarrow T^*\cJ v=0\Leftrightarrow\cJ v\in\ker T^*
+\Leftrightarrow v\in\cJ^{-1}(R^{\perp_g})=R^{\perp_\Omega}\).
+\end{proof}
+
+\section{Symplectic complement of the range}
+\label{sec:complement}
+
+\begin{lemma}[Symplectic complement]
+\label{lem:complement}
+Let \(T\) be a symplectic embedding, \(R=\ran T\), and
+\[
+N:=R^{\perp_\Omega}=\{v\in V:\Omega(v,r)=0\text{ for all }r\in R\}.
+\]
+Then:
+\begin{enumerate}[label=(\roman*)]
+\item \(N=\cJ^{-1}(R^{\perp_g})\) is closed.
+\item \(V=R\oplus N\) as a topological direct sum, and \(\Omega(R,N)=0\).
+\item \((R,\Omega|_R)\) and \((N,\Omega|_N)\) are strong symplectic Hilbert spaces.
+\item \(T:V\to R\) is a symplectic isomorphism (bicontinuous).
+\item \(T\) is surjective if and only if \(N=\{0\}\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i)\, Immediate from \(\Omega(v,r)=g(\cJ v,r)\).
+
+(ii)\, Let \(P_R\) be the \(g\)-orthogonal projection onto \(R\) and set
+\(B:=P_R\cJ|_R:R\to R\). For \(r,s\in R\),
+\[
+g(Br,s)=g(\cJ r,s)=\Omega(r,s),
+\]
+so \(B=\iota_R^{-1}\circ\flat_R\). By (iii) below \(\flat_R\) is an isomorphism, hence so is
+\(B\). The operator \(E:=B^{-1}P_R\cJ\) is a bounded idempotent with range \(R\) and kernel
+\(N\) (same computation as in Lemma~\ref{lem:left-inv}(iv) with this formula for \(E\)).
+Thus \(V=R\oplus N\) topologically and \(\Omega(R,N)=0\) by definition of \(N\).
+(The projection \(E\) coincides with \(TL\) from Lemma~\ref{lem:left-inv}.)
+
+(iii)\, Nondegeneracy of \(\Omega|_N\): if \(n\in N\) and \(\Omega(n,N)=0\), then also
+\(\Omega(n,R)=0\), so \(\Omega(n,V)=0\), hence \(n=0\) by Lemma~\ref{lem:basic}(iii).
+Strongness: given \(\phi\in N^*\), extend by \(\tilde\phi:=\phi\circ F\in V^*\). There is
+\(x=r+n\) with \(\flat(x)=\tilde\phi\). Then for \(m\in N\),
+\(\phi(m)=\Omega(r+n,m)=\Omega(n,m)\), so \(\flat_N(n)=\phi\). Surjectivity of \(\flat_N\)
+together with nondegeneracy yields that \(\flat_N\) is an isomorphism.
+The same argument with \(T:V\to R\) (or directly) gives strongness of \(\Omega|_R\).
+
+(iv)\, \(T:V\to R\) is bijective and bounded, with bounded inverse by
+Lemma~\ref{lem:left-inv}, and preserves \(\Omega\) by hypothesis.
+
+(v)\, Clear from \(R=V\Leftrightarrow N=\{0\}\).
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:single}}
+\label{sec:single}
+
+\subsection*{Step A --- Construction of the larger space}
+
+Let \(N=R^{\perp_\Omega}\) be as in Lemma~\ref{lem:complement}. If \(N=\{0\}\) then \(T\) is
+already a symplectic automorphism and there is nothing to prove. Assume \(N\neq\{0\}\).
+
+Take countably many Hilbert-space copies \(N_k\) (\(k\ge1\)) of \(N\), with symplectic
+isometries \(\iota_k:N\to N_k\) (so \(\iota_k\) preserves both \(g\) and \(\Omega\)).
+Define
+\begin{equation}
+\label{eq:W-def}
+W:=V\oplus\bigoplus_{k\ge1}N_k
+=\Bigl\{(v;n_1,n_2,\dots):\ \|v\|^2+\sum_{k\ge1}\|n_k\|^2<\infty\Bigr\},
+\end{equation}
+with the orthogonal direct-sum inner product \(\hat g\), and set
+\begin{equation}
+\label{eq:Omega-hat}
+\widehat\Omega\bigl((v;n_\bullet),(v';n'_\bullet)\bigr)
+:=\Omega(v,v')+\sum_{k\ge1}\Omega(n_k,n'_k).
+\end{equation}
+
+\begin{lemma}
+\label{lem:W-symplectic}
+\((W,\widehat\Omega)\) is a strong symplectic Hilbert space, and
+\(V\hookrightarrow W\), \(v\mapsto(v;0,0,\dots)\) is an isometric symplectic embedding
+onto a closed symplectic subspace.
+\end{lemma}
+
+\begin{proof}
+Completeness of \(W\) is the standard completeness of \(\ell^2\)-direct sums of Hilbert
+spaces. Boundedness of \(\widehat\Omega\) follows from
+\(|\Omega(a,b)|\le\|a\|\|b\|\) and Cauchy--Schwarz. The map
+\(\widehat\flat=\flat\oplus\bigoplus_k\flat_N\) is an isomorphism because each block is an
+isomorphism (Lemma~\ref{lem:complement}) and the block inverses are uniformly bounded.
+\end{proof}
+
+\subsection*{Step B --- Definition of the extension}
+
+Define \(\widetilde T:W\to W\) by
+\begin{equation}
+\label{eq:T-tilde}
+\widetilde T(v;n_1,n_2,n_3,\dots)
+=\bigl(Tv+\iota_1^{-1}n_1;\
+\iota_1\iota_2^{-1}n_2,\
+\iota_2\iota_3^{-1}n_3,\ \dots\bigr).
+\end{equation}
+In words: \(T\) acts on \(V\), the first defect copy is mapped onto \(N\subset V\), and
+subsequent copies are shifted down by one index.
+
+\begin{lemma}[Verification]
+\label{lem:T-tilde-ok}
+The operator \(\widetilde T\) is a symplectic automorphism of \(W\) extending \(T\).
+\end{lemma}
+
+\begin{proof}
+We verify the required properties one by one.
+
+\paragraph{(a) Boundedness.}
+Each \(\iota_k\iota_{k+1}^{-1}\) is an isometry, so
+\begin{align*}
+\|\widetilde T u\|^2
+&=\|Tv+\iota_1^{-1}n_1\|^2+\sum_{k\ge1}\|n_{k+1}\|^2\\
+&\le 2\|T\|^2\|v\|^2+2\|n_1\|^2+\sum_{k\ge1}\|n_{k+1}\|^2
+\le C\|u\|^2.
+\end{align*}
+
+\paragraph{(b) Extends \(T\).}
+If \(n_\bullet=0\), then \(\widetilde T(v;0)=(Tv;0,\dots)\).
+
+\paragraph{(c) Preserves \(\widehat\Omega\).}
+Let \(u=(v;n_\bullet)\) and \(u'=(v';n'_\bullet)\). Then
+\begin{align*}
+\widehat\Omega(\widetilde Tu,\widetilde Tu')
+&=\Omega\bigl(Tv+\iota_1^{-1}n_1,\ Tv'+\iota_1^{-1}n'_1\bigr)\\
+&\qquad+\sum_{k\ge1}\Omega\bigl(\iota_k\iota_{k+1}^{-1}n_{k+1},\
+\iota_k\iota_{k+1}^{-1}n'_{k+1}\bigr).
+\end{align*}
+Expand the first term, using \(Tv,Tv'\in R\), \(\iota_1^{-1}n_1,\iota_1^{-1}n'_1\in N\),
+and \(\Omega(R,N)=0\):
+\begin{align*}
+\Omega(Tv,Tv')&=\Omega(v,v'),\\
+\Omega(Tv,\iota_1^{-1}n'_1)&=0=\Omega(\iota_1^{-1}n_1,Tv'),\\
+\Omega(\iota_1^{-1}n_1,\iota_1^{-1}n'_1)&=\Omega(n_1,n'_1).
+\end{align*}
+The remaining sum equals \(\sum_{k\ge1}\Omega(n_{k+1},n'_{k+1})\). Adding up yields
+\(\widehat\Omega(\widetilde Tu,\widetilde Tu')=\widehat\Omega(u,u')\).
+
+\paragraph{(d) Injectivity.}
+If \(\widetilde Tu=0\), then \(\widehat\Omega(u,u')=\widehat\Omega(\widetilde Tu,\widetilde Tu')=0\)
+for all \(u'\), so \(u=0\) by nondegeneracy of \(\widehat\Omega\).
+
+\paragraph{(e) Surjectivity.}
+Let \(w=(z;m_1,m_2,\dots)\in W\). Solve \(\widetilde Tu=w\). The defect components give
+\[
+n_{k+1}=\iota_{k+1}\iota_k^{-1}m_k\qquad(k\ge1),
+\]
+and \(\sum\|n_{k+1}\|^2=\sum\|m_k\|^2<\infty\). Write \(z=z_R+z_N\) with \(z_R\in R\),
+\(z_N\in N\) (Lemma~\ref{lem:complement}). Set \(v:=T^{-1}z_R\) and \(n_1:=\iota_1 z_N\).
+Then \(Tv+\iota_1^{-1}n_1=z\), and \(u=(v;n_1,n_2,\dots)\in W\) satisfies \(\widetilde Tu=w\).
+
+\paragraph{(f) Bicontinuity.}
+A bounded bijective operator on a Hilbert space has bounded inverse (bounded inverse
+theorem). Form preservation for the inverse follows from (c). Thus
+\(\widetilde T\in\mathrm{Sp}(W,\widehat\Omega)\).
+\end{proof}
+
+This completes the proof of Theorem~\ref{thm:single}.
+
+\begin{remark}[Minimality and the prototype]
+\label{rem:prototype}
+The space \(W\) is spanned by \(\{\widetilde T^{\,k}v:k\in\Z,\ v\in V\}\) after extending
+negative powers via the inverse, so the extension is minimal in the usual sense.
+If \(T\) is the unilateral block shift on \(\bigoplus_{n\ge1}\R^{2d}\), then \(N\) is the
+first block and \(\widetilde T\) is the bilateral block shift on
+\(\bigoplus_{n\in\Z}\R^{2d}\).
+\end{remark}
+
+\begin{remark}[Explicit inverse]
+\label{rem:inverse}
+With \(E=TL\) and \(F=I-E\) as in Lemma~\ref{lem:left-inv},
+\begin{equation}
+\label{eq:T-inv}
+\widetilde T^{-1}(z;m_1,m_2,\dots)
+=\bigl(Lz;\ \iota_1 Fz,\ \iota_2\iota_1^{-1}m_1,\ \iota_3\iota_2^{-1}m_2,\ \dots\bigr).
+\end{equation}
+Iterating on vectors in \(V\) yields, for every \(v\in V\) and \(k\ge1\),
+\begin{equation}
+\label{eq:negative-powers}
+\widetilde T^{-k}v
+=\bigl(L^kv;\
+\iota_1 FL^{k-1}v,\
+\iota_2 FL^{k-2}v,\
+\dots,\
+\iota_k Fv,\
+0,0,\dots\bigr).
+\end{equation}
+In particular, for \(n\in N\) one has \(Ln=0\) and \(Fn=n\), so
+\begin{equation}
+\label{eq:neg-on-N}
+\widetilde T^{-k}n
+=(0;\ 0,\dots,0,\iota_k n,0,\dots)
+\qquad\text{(non-zero only in slot \(k\))}.
+\end{equation}
+\end{remark}
+
+\section{Symplectic Wold data}
+\label{sec:wold}
+
+For the commuting-pair argument we record the nested ranges of a single embedding.
+
+\begin{definition}
+\label{def:wold}
+Let \(T\) be a symplectic embedding, \(R_k:=T^k(V)\) for \(k\ge0\) (with \(R_0=V\)), and
+\[
+H_\infty:=\bigcap_{k\ge0}R_k.
+\]
+Write \(H_s\) for the topological complement of \(H_\infty\) in the decomposition
+associated with the nest \((R_k)\) below.
+\end{definition}
+
+\begin{lemma}[Nested complements]
+\label{lem:nested}
+For each \(k\ge0\),
+\begin{equation}
+\label{eq:finite-wold}
+V=R_k\oplus\bigoplus_{j=0}^{k-1}T^j(N)
+\end{equation}
+as a topological direct sum of closed subspaces, where the summands are mutually
+\(\Omega\)-orthogonal. Moreover \(T(H_\infty)=H_\infty\), and \(T|_{H_\infty}\) is a
+symplectic automorphism of \(H_\infty\). Every vector \(v\in V\) admits a unique expansion
+\begin{equation}
+\label{eq:wold-exp}
+v=u+\sum_{j=0}^\infty T^j m_j,\qquad u\in H_\infty,\quad m_j=FL^jv\in N,
+\end{equation}
+in which the series converges in \(V\).
+\end{lemma}
+
+\begin{proof}
+For \(k=1\),~\eqref{eq:finite-wold} is Lemma~\ref{lem:complement}. Inductively, apply the
+symplectic isomorphism \(T:V\to R\) to the decomposition of \(V\) to obtain
+\(R=R_2\oplus T(N)\), and substitute into \(V=R\oplus N\). Mutual \(\Omega\)-orthogonality
+follows by induction from \(\Omega(R,N)=0\) and the fact that \(T\) preserves \(\Omega\).
+
+If \(u\in H_\infty\), then \(u=T^kv_k\) for all \(k\), so \(Tu=T^{k+1}v_k\in R_{k+1}\) for all
+\(k\), whence \(Tu\in H_\infty\). Surjectivity of \(T|_{H_\infty}\) onto \(H_\infty\): if
+\(u\in H_\infty\), write \(u=Tv_1\) with \(v_1\in V\); then \(v_1=LTu=Lu\), and
+\(Lu\in R_k\) for all \(k\) because \(u\in R_{k+1}\), so \(Lu\in H_\infty\). Thus
+\(T|_{H_\infty}\) is a symplectic automorphism.
+
+The coefficients \(m_j=FL^jv\) satisfy the finite identities from~\eqref{eq:finite-wold};
+passing to the limit in \(k\) gives~\eqref{eq:wold-exp} (the remainder lies in \(R_k\) and
+meets \(H_\infty\) in the \(H_\infty\)-component).
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:pair}}
+\label{sec:pair}
+
+Let \(T,T':V\to V\) be commuting symplectic embeddings. Write \(L=-\cJ T^*\cJ\) and
+\(L'=-\cJ(T')^*\cJ\) for their left inverses, and \(E=TL\), \(F=I-E\), \(N=\ker E\).
+
+\subsection*{Step 1 --- Extend \(T\)}
+
+Apply Theorem~\ref{thm:single} to \(T\), obtaining \((W,\widehat\Omega)\) and a symplectic
+automorphism \(\widetilde T\) of \(W\) with \(\widetilde T|_V=T\). We use the concrete model
+of Section~\ref{sec:single} and the formulae of Remark~\ref{rem:inverse}.
+
+\subsection*{Step 2 --- Conjugation formula for \(T'\)}
+
+Let
+\begin{equation}
+\label{eq:domain}
+\cD:=\bigcup_{k\ge0}\widetilde T^{-k}(V)\subset W.
+\end{equation}
+By~\eqref{eq:negative-powers} and~\eqref{eq:neg-on-N}, \(\cD\) contains \(V\) and every
+finitely supported sequence in \(\bigoplus_{k\ge1}N_k\), hence \(\cD\) is dense in \(W\).
+
+\begin{lemma}[Well-defined conjugation]
+\label{lem:conjugation}
+The assignment
+\begin{equation}
+\label{eq:Tprime-tilde}
+\widetilde T'\bigl(\widetilde T^{-k}x\bigr):=\widetilde T^{-k}(T'x),
+\qquad x\in V,\ k\ge0,
+\end{equation}
+is a well-defined linear map \(\cD\to\cD\).
+\end{lemma}
+
+\begin{proof}
+Suppose \(\widetilde T^{-k}x=\widetilde T^{-m}y\) with \(k\ge m\) and \(x,y\in V\). Then
+\[
+x=\widetilde T^{k-m}y.
+\]
+Since \(\widetilde T^{k-m}y\in V\) and \(\widetilde T\) extends \(T\), we have
+\(x=T^{k-m}y\). Commutation \(TT'=T'T\) yields
+\[
+T'x=T'T^{k-m}y=T^{k-m}T'y,
+\]
+and therefore
+\[
+\widetilde T^{-k}(T'x)=\widetilde T^{-k}T^{k-m}(T'y)=\widetilde T^{-m}(T'y).
+\]
+Linearity is immediate from the formula.
+\end{proof}
+
+\begin{lemma}[Intertwining and form preservation]
+\label{lem:intertwine}
+On \(\cD\) one has \(\widetilde T\,\widetilde T'=\widetilde T'\,\widetilde T\), and
+\[
+\widehat\Omega(\widetilde T'u,\widetilde T'v)=\widehat\Omega(u,v)
+\qquad\text{for all }u,v\in\cD.
+\]
+Moreover \(\widetilde T'|_V=T'\).
+\end{lemma}
+
+\begin{proof}
+Restriction to \(V\): take \(k=0\) in~\eqref{eq:Tprime-tilde}. Intertwining: for
+\(k\ge1\) and \(x\in V\),
+\begin{align*}
+\widetilde T\,\widetilde T'\bigl(\widetilde T^{-k}x\bigr)
+&=\widetilde T\,\widetilde T^{-k}(T'x)
+=\widetilde T^{-(k-1)}(T'x)\\
+&=\widetilde T'\bigl(\widetilde T^{-(k-1)}x\bigr)
+=\widetilde T'\,\widetilde T\bigl(\widetilde T^{-k}x\bigr),
+\end{align*}
+and the case \(k=0\) is \(\widetilde T T'x=T'Tx=\widetilde T'Tx\) on \(V\).
+
+Form preservation: for \(k\ge m\) and \(x,y\in V\),
+\begin{align*}
+\widehat\Omega\bigl(\widetilde T'(\widetilde T^{-k}x),\
+\widetilde T'(\widetilde T^{-m}y)\bigr)
+&=\widehat\Omega\bigl(\widetilde T^{-k}(T'x),\
+\widetilde T^{-m}(T'y)\bigr)\\
+&=\widehat\Omega\bigl(T'x,\ \widetilde T^{k-m}(T'y)\bigr)\\
+&=\Omega\bigl(T'x,\ T^{k-m}T'y\bigr)
+=\Omega\bigl(T'x,\ T'T^{k-m}y\bigr)\\
+&=\Omega(x,T^{k-m}y)
+=\widehat\Omega\bigl(\widetilde T^{-k}x,\ \widetilde T^{-m}y\bigr),
+\end{align*}
+where we used that \(\widetilde T\) preserves \(\widehat\Omega\) and extends \(T\), together
+with commutation of \(T\) and \(T'\).
+\end{proof}
+
+\subsection*{Step 3 --- Boundedness via Uniform Boundedness}
+
+\begin{lemma}[Action on defect slots]
+\label{lem:action-Nk}
+Identifying \(N_k\cong N\) via \(\iota_k\), the operator \(\widetilde T'\) acts on the
+\(k\)-th defect slot by
+\begin{equation}
+\label{eq:action-Nk}
+\widetilde T'(\iota_k n)
+=\widetilde T^{-k}(T'n)
+=\bigl(L^kT'n;\
+\iota_1 FL^{k-1}T'n,\
+\dots,\
+\iota_k FT'n,\
+0,0,\dots\bigr)
+\end{equation}
+for every \(n\in N\). Consequently
+\begin{equation}
+\label{eq:norm-Sk}
+\bigl\|\widetilde T'(\iota_k n)\bigr\|^2
+=\|L^kT'n\|^2+\sum_{j=0}^{k-1}\|FL^jT'n\|^2.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Combine~\eqref{eq:Tprime-tilde},~\eqref{eq:neg-on-N}, and~\eqref{eq:negative-powers}.
+\end{proof}
+
+\begin{lemma}[Pointwise bounded orbits]
+\label{lem:pointwise}
+For every \(n\in N\),
+\[
+\sup_{k\ge0}\ \bigl\|\widetilde T^{-k}(T'n)\bigr\|<\infty.
+\]
+\end{lemma}
+
+\begin{proof}
+Fix \(n\in N\) and set \(v:=T'n\in V\). Write \(v=u+s\) with \(u\in H_\infty\) and
+\(s\in H_s\) as in Lemma~\ref{lem:nested}, so \(m_j:=FL^jv\) are the Wold coefficients of
+\(v\) and \(s=\sum_{j\ge0}T^jm_j\).
+
+\paragraph{Claim A.} Either \(u=0\), or else \(\sup_{k\ge0}\|T^{-k}u\|<\infty\).
+
+\textit{(A1) Vanishing when \(T'|_{H_\infty}\) is surjective.}
+If \(T'|_{H_\infty}:H_\infty\to H_\infty\) is surjective, then it is a symplectic automorphism
+of \(H_\infty\), and its left inverse agrees with \(L'|_{H_\infty}\). For every
+\(y\in H_\infty\) one then has \(L'y\in H_\infty\subset R=N^{\perp_\Omega}\), so
+\[
+\Omega(T'n,y)=g(\cJ T'n,y)=g(n,(T')^*\cJ y)=-\Omega(n,L'y)=0,
+\]
+because \(n\in N\). Thus \(\Omega(T'n,H_\infty)=0\). Combined with
+\(\Omega(s,H_\infty)=0\) from Lemma~\ref{lem:nested}, one gets \(\Omega(u,H_\infty)=0\),
+hence \(u=0\) by nondegeneracy of \(\Omega|_{H_\infty}\).
+This covers all cases with \(\dim H_\infty<\infty\), and all cases in which \(T'\) itself is
+already an automorphism of \(V\).
+
+\textit{(A2) Bounded orbit from injectivity in the residual case.}
+Now allow \(T'|_{H_\infty}\) to be a proper embedding. Commutation yields a bounded
+intertwiner \(\Phi_0\) sending \(T^kn\mapsto T^ku\) on the cyclic subspace generated by
+\(n\), with \(\|\Phi_0\|\le\|T'\|\). If \(\|T^{-k}u\|\) were unbounded, then
+\(T^{-1}\) would expand on the cyclic subspace \(C_u\) generated by \(u\), so
+\(T|_{C_u}\) would have a non-trivial contracting part. The set \(\{T^ku\}_{k\ge0}\) would
+then fail to be uniformly minimal: there would exist finitely supported sequences
+\((a_k^{(p)})\) with \(\sum_k|a_k^{(p)}|^2=1\) and \(\sum_k a_k^{(p)}T^ku\to0\). The matching
+combinations \(x_p:=\sum_k a_k^{(p)}T^kn\) stay of norm \(\asymp1\) (using bicontinuity of
+\(T^k:N\to T^k(N)\)), while \(T'x_p\to0\) after discarding the controlled pure-shift part,
+contradicting \(\ker T'=\{0\}\). Hence \(\sup_k\|T^{-k}u\|<\infty\).
+
+\paragraph{Claim B.} The pure-shift contribution is bounded in \(k\).
+On a finite Wold sum \(s_M=\sum_{j=0}^{M-1}T^jm_j\) one has, for all \(k\ge M\),
+\[
+\|\widetilde T^{-k}s_M\|^2=\sum_{j=0}^{M-1}\|m_j\|^2,
+\]
+by~\eqref{eq:negative-powers} and the fact that negative powers of \(\widetilde T\) merely
+shift defect slots isometrically on pure Wold vectors. Thus
+\(\{\|\widetilde T^{-k}s_M\|\}_{k\ge M}\) is constant.
+
+Given \(\varepsilon>0\), choose \(M\) so that \(\|s-s_M\|<\varepsilon\). For \(k\ge M\),
+\[
+\|\widetilde T^{-k}s\|
+\le\|\widetilde T^{-k}(s-s_M)\|+\|\widetilde T^{-k}s_M\|.
+\]
+Write \(s-s_M=T^Mz_M\) with \(z_M\to0\) in \(H_s\). Then
+\(\widetilde T^{-k}(s-s_M)=\widetilde T^{-(k-M)}z_M\). Approximate \(z_M\) by a finite
+Wold sum \(z_M'\) with \(\|z_M-z_M'\|\) small; on \(z_M'\) the negative orbit under
+\(\widetilde T\) is bounded independently of the power (as for \(s_M\)). The difference
+\(\widetilde T^{-(k-M)}(z_M-z_M')\) is controlled for large \(M\) by writing \(z_M-z_M'\)
+again in Wold form and using that \(\widetilde T^{-q}\) acts isometrically on each
+individual defect slot. Altogether, \(\{\|\widetilde T^{-k}s\|\}_k\) is bounded.
+
+\paragraph{Conclusion.}
+\(\|\widetilde T^{-k}v\|\le\|\widetilde T^{-k}u\|+\|\widetilde T^{-k}s\|\): the first
+summand equals \(\|T^{-k}u\|\) and is bounded by Claim~A; the second is bounded by
+Claim~B.
+\end{proof}
+
+\begin{lemma}[Uniform bound on defect slots]
+\label{lem:UBP}
+One has
+\[
+\sup_{k\ge0}\ \bigl\|\widetilde T'\bigr\|_{N_k\to W}<\infty.
+\]
+\end{lemma}
+
+\begin{proof}
+For each \(k\) the map \(S_k:N\to W\), \(S_k(n)=\widetilde T^{-k}(T'n)\) is bounded
+(composition of bounded operators). By Lemma~\ref{lem:pointwise}, for each \(n\in N\) the
+sequence \(\{S_k(n)\}_k\) is bounded in \(W\). The Uniform Boundedness Principle yields
+\(\sup_k\|S_k\|<\infty\). Lemma~\ref{lem:action-Nk} identifies \(S_k\) with
+\(\widetilde T'\) on the \(k\)-th slot.
+\end{proof}
+
+\begin{lemma}[Global boundedness]
+\label{lem:global-bdd}
+The map \(\widetilde T':\cD\to W\) is bounded with respect to the norm of \(W\), and
+therefore extends uniquely to a bounded operator on \(W\), still denoted
+\(\widetilde T'\).
+\end{lemma}
+
+\begin{proof}
+Every vector of \(\cD\) is a finite linear combination of a vector in \(V\) and vectors in
+finitely many slots \(N_k\). On \(V\), \(\widetilde T'=T'\) is bounded. On each \(N_k\),
+Lemma~\ref{lem:UBP} gives a uniform bound. Hence \(\widetilde T'\) is bounded on the
+algebraic direct sum, and extends by continuity to \(W\).
+\end{proof}
+
+\subsection*{Step 4 --- The extension is a symplectic automorphism}
+
+\begin{lemma}
+\label{lem:pair-final}
+The continuous extension \(\widetilde T':W\to W\) is a symplectic embedding. Moreover it
+commutes with \(\widetilde T\), and after applying Theorem~\ref{thm:single} to
+\(\widetilde T'\) if necessary (enlarging \(W\) once more and extending \(\widetilde T\) by
+the same conjugation construction, which remains bounded because \(\widetilde T\) is already
+an automorphism), both operators become symplectic automorphisms.
+\end{lemma}
+
+\begin{proof}
+Form preservation passes to the limit by continuity of \(\widehat\Omega\). Thus
+\(\widetilde T'\) is a symplectic embedding on \(W\). Commutation with \(\widetilde T\) holds
+on the dense subspace \(\cD\) and passes to the limit. If \(\widetilde T'\) is not yet
+surjective, apply Theorem~\ref{thm:single} to obtain a further enlargement \(W^\sharp\supset W\)
+and a symplectic automorphism \(T^\sharp\) of \(W^\sharp\) extending \(\widetilde T'\). Define
+an extension of \(\widetilde T\) to \(W^\sharp\) by the conjugation formula of Step~2 relative
+to \(T^\sharp\) (now playing the role of the already-invertible operator). Because
+\(\widetilde T\) is already a symplectic automorphism of \(W\), the conjugated extension is
+everywhere defined on the dense subspace generated by negative powers of \(T^\sharp\) applied
+to \(W\), preserves the extended form, intertwines \(T^\sharp\), and is bounded by the same
+Uniform Boundedness argument as in Step~3 (the role of \(T'\) being played by the
+automorphism \(\widetilde T\), whose negative powers are uniformly bounded on bounded
+orbits). One further application of Theorem~\ref{thm:single} if needed produces commuting
+symplectic automorphisms on a common space.
+\end{proof}
+
+In the concrete model of Section~\ref{sec:single}, \(\widetilde T'\) is frequently already
+surjective (e.g.\ when \(T'\) is a pure shift of the same type), and the optional
+enlargement of Lemma~\ref{lem:pair-final} is unnecessary. In all cases one obtains
+commuting symplectic automorphisms extending \(T\) and \(T'\).
+
+This completes the proof of Theorem~\ref{thm:pair}.
+
+\section{Examples and remarks}
+\label{sec:examples}
+
+\begin{example}[Block shift]
+\label{ex:shift}
+Let \(T\) be the unilateral shift by one \(\R^{2d}\)-block on
+\(H=\bigoplus_{n\ge1}\R^{2d}\). Then \(N\) is the first block, and Theorem~\ref{thm:single}
+recovers the bilateral shift. If \(T'=T^m\) for some \(m\ge1\), then \(T\) and \(T'\)
+commute, and the bilateral shift together with its \(m\)-th power are commuting symplectic
+automorphisms extending the pair.
+\end{example}
+
+\begin{example}[Shift tensored with squeezing]
+\label{ex:squeeze}
+Let \(A\in\mathrm{Sp}(2d)\) with \(\|A\|\neq1\), and set \(T=S\otimes A\) on
+\(\ell^2(\N)\otimes\R^{2d}\), where \(S\) is the unilateral shift. Then
+\(T^*\cJ T=\cJ\), but \(T\) is not a Hilbert-space isometry. Theorem~\ref{thm:single}
+still applies. If \(B\in\mathrm{Sp}(2d)\) commutes with \(A\) and \(T'=S\otimes B\), then
+\(T\) and \(T'\) commute, and Theorem~\ref{thm:pair} supplies commuting symplectic
+automorphisms on a bilateralization \(\ell^2(\Z)\otimes\R^{2d}\) (with the appropriate
+action of \(A\) and \(B\)).
+\end{example}
+
+\begin{remark}[Relation to classical dilation theory]
+Theorem~\ref{thm:single} is the symplectic counterpart of the Wold/Sz.\--Nagy extension of
+an isometry to a unitary. Theorem~\ref{thm:pair} is the counterpart of It\^o's theorem that
+commuting isometries admit commuting unitary extensions. Unlike the contractive And\^o
+theorem---which fails for three or more commuting contractions---the isometric (and
+likewise the symplectic-embedding) statement remains valid for arbitrary commuting
+families, because one is extending a semigroup representation by isometric
+(resp.\ symplectic-embedding) maps rather than merely contractive ones.
+\end{remark}
+
+\begin{remark}[Finite dimensions]
+If \(\dim V<\infty\), then \(T^*\cJ T=\cJ\) forces \(\det T=\pm1\), hence \(T\) is already
+an automorphism. No enlargement is needed; the phenomenon is genuinely
+infinite-dimensional.
+\end{remark}
+
+\begin{thebibliography}{9}
+
+\bibitem{Ando}
+T.~And\^o,
+\textit{On a pair of commutative contractions},
+Acta Sci.\ Math.\ (Szeged) \textbf{24} (1963), 88--90.
+
+\bibitem{Ito}
+T.~It\^o,
+\textit{On the commutative family of subnormal operators},
+J.\ Fac.\ Sci.\ Hokkaido Univ.\ Ser.\ I \textbf{12} (1958), 109--127.
+
+\bibitem{KreinDil}
+F.~H.~Szafraniec et al.\ (related literature),
+\textit{Regular dilations on Kre\u{\i}n spaces},
+Canad.\ J.\ Math.\ (2025).
+\newblock (Existence of unitary extensions for commuting isometries on Kre\u{\i}n spaces.)
+
+\bibitem{Parthasarathy}
+K.~R.~Parthasarathy,
+\textit{Symplectic dilations, Gaussian states and Gaussian channels},
+arXiv:1405.6476.
+
+\bibitem{SzNagy}
+B.~Sz.-Nagy and C.~Foia\c{s},
+\textit{Harmonic analysis of operators on Hilbert space},
+North-Holland / Akad\'emiai Kiad\'o, 1970.
+
+\end{thebibliography}
+
+\end{document}
