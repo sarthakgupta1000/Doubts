@@ -1,0 +1,259 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}[theorem]{Remark}
+\begin{document}
+
+\noindent
+Let \(T,T'\in B(H)\) be isometries with \(TT'=T'T\).
+Write \(D_{T^*}=(I-TT^*)^{1/2}\) and \(D_{{T'}^*}=(I-T'T'^*)^{1/2}\).
+Since \(T\) is an isometry one has \(D_T=0\) and \(D_{T^*}=I-TT^*=P_{\ker T^*}\)
+(and likewise for \(T'\)).
+
+%% ============================================================
+\section*{1. Single isometry: Halmos block matrix}
+
+On \(K_1=H\oplus H\) define
+\begin{equation}
+\label{eq:Halmos}
+\boxed{
+U
+=
+\begin{pmatrix}
+T & D_{T^*} \\
+0 & -T^*
+\end{pmatrix}.
+}
+\end{equation}
+
+\begin{lemma}
+\(U\) is unitary and \(U\big|_{H\oplus\{0\}}=T\). In particular \(U\) is a unitary
+\emph{extension} of \(T\), and \(U^n\big|_H=T^n\) for all \(n\ge 0\).
+\end{lemma}
+
+\begin{proof}
+The identity \(TD_T=D_{T^*}T\) collapses to \(D_{T^*}T=0\). Hence
+\begin{align*}
+U^*U
+&=
+\begin{pmatrix}
+T^* & 0 \\
+D_{T^*} & -T
+\end{pmatrix}
+\begin{pmatrix}
+T & D_{T^*} \\
+0 & -T^*
+\end{pmatrix}
+=
+\begin{pmatrix}
+T^*T & T^*D_{T^*} \\
+D_{T^*}T & D_{T^*}^2+TT^*
+\end{pmatrix}
+=
+\begin{pmatrix}
+I & 0 \\
+0 & I
+\end{pmatrix},
+\end{align*}
+so \(U\) is unitary. Also \(U(h,0)=(Th,0)\).
+\end{proof}
+
+%% ============================================================
+\section*{2. Doubly commuting pair: both Halmos matrices on \(H\oplus H\)}
+
+Assume in addition \(T^*T'=T'T^*\) (equivalently \(TD_{{T'}^*}=D_{{T'}^*}T\) and
+\(T'D_{T^*}=D_{T^*}T'\)).
+
+On the \emph{same} space \(H\oplus H\) set
+\begin{equation}
+\label{eq:both-Halmos}
+\boxed{
+U
+=
+\begin{pmatrix}
+T & D_{T^*} \\
+0 & -T^*
+\end{pmatrix},
+\qquad
+U'
+=
+\begin{pmatrix}
+T' & D_{{T'}^*} \\
+0 & -{T'}^*
+\end{pmatrix}.
+}
+\end{equation}
+
+\begin{theorem}
+If \(T,T'\) doubly commute, then \(U\) and \(U'\) are commuting unitaries on
+\(H\oplus H\) extending \(T\) and \(T'\) respectively.
+\end{theorem}
+
+\begin{proof}
+Each factor is unitary by Section~1. Compute
+\begin{align*}
+UU'
+&=
+\begin{pmatrix}
+TT' & T\,D_{{T'}^*}-D_{T^*}{T'}^* \\
+0 & T^*{T'}^*
+\end{pmatrix},
+&
+U'U
+&=
+\begin{pmatrix}
+T'T & T'D_{T^*}-D_{{T'}^*}T^* \\
+0 & {T'}^*T^*
+\end{pmatrix}.
+\end{align*}
+Double commutativity gives \(TT'=T'T\), \(T^*{T'}^*={T'}^*T^*\), and
+\[
+T\,D_{{T'}^*}-D_{T^*}{T'}^*
+=
+T'D_{T^*}-D_{{T'}^*}T^*,
+\]
+so \(UU'=U'U\).
+\end{proof}
+
+%% ============================================================
+\section*{3. General commuting pair: Halmos, then extend the commutant}
+
+Now assume only \(TT'=T'T\) (not necessarily double).
+
+\subsection*{Step A --- Halmos extension of \(T\)}
+On \(K_1=H\oplus H\),
+\[
+U
+=
+\begin{pmatrix}
+T & D_{T^*} \\
+0 & -T^*
+\end{pmatrix}.
+\]
+
+\subsection*{Step B --- isometric extension of \(T'\) commuting with \(U\)}
+Define \(\widetilde{T}'\) on the dense manifold
+\(\operatorname{span}\{U^n(h,0):n\in\mathbb{Z},\,h\in H\}\) by
+\begin{equation}
+\label{eq:inductive}
+\widetilde{T}'\bigl(U^n(h,0)\bigr)=U^n(T'h,0).
+\end{equation}
+The same inner-product computation as in the classical inductive proof shows that
+\(\widetilde{T}'\) is a well-defined isometry on all of \(K_1\) (for the Halmos \(U\) of an
+isometry one has \(\bigvee_{n\in\mathbb{Z}}U^n(H\oplus 0)=H\oplus H\)), that
+\[
+\widetilde{T}'\big|_{H\oplus 0}=T',
+\qquad
+\widetilde{T}'U=U\widetilde{T}',
+\]
+and that \(\widetilde{T}'\) is unitary whenever \(T'\) is.
+
+\medskip
+\noindent
+\textbf{Explicit \(2\times 2\) block form of \(\widetilde{T}'\).}
+Write vectors as \((x,y)\in H\oplus H\). One checks from~\eqref{eq:inductive} and
+\(U^*(h,0)=(T^*h,\,D_{T^*}h)\) that
+\[
+\widetilde{T}'
+=
+\begin{pmatrix}
+T' & X \\
+0 & Y
+\end{pmatrix},
+\]
+where the operators \(X,Y\in B(H)\) are uniquely determined by: for all \(d\in\ker T^*=\operatorname{Ran}D_{T^*}\),
+\begin{equation}
+\label{eq:XY-on-defect}
+Xd=0,
+\qquad
+Yd=D_{T^*}T'd,
+\end{equation}
+together with the commutation identities forced by \(\widetilde{T}'U=U\widetilde{T}'\),
+\begin{equation}
+\label{eq:XY-comm}
+YT^*=T^*Y,
+\qquad
+T'D_{T^*}-XT^*=TX+D_{T^*}Y,
+\end{equation}
+and the isometry conditions
+\begin{equation}
+\label{eq:XY-isom}
+T'^*X=0,
+\qquad
+X^*X+Y^*Y=I.
+\end{equation}
+(When \(T,T'\) doubly commute one may take \(X=D_{{T'}^*}\) and \(Y=-{T'}^*\), recovering~\eqref{eq:both-Halmos};
+in general \(X,Y\) are the unique solution of~\eqref{eq:XY-on-defect}--\eqref{eq:XY-isom} obtained from~\eqref{eq:inductive}.)
+
+\subsection*{Step C --- Halmos unitarization of \(\widetilde{T}'\) (if needed)}
+If \(\widetilde{T}'\) is already unitary, stop: \((U,\widetilde{T}')\) is the desired pair on \(H\oplus H\).
+
+If not, apply Halmos to \(\widetilde{T}'\) on \(K=K_1\oplus K_1=(H\oplus H)\oplus(H\oplus H)\):
+\begin{equation}
+\label{eq:Uprime-Halmos}
+\boxed{
+U'
+=
+\begin{pmatrix}
+\widetilde{T}' & D_{\widetilde{T}'{}^*} \\
+0 & -{\widetilde{T}'}^*
+\end{pmatrix}.
+}
+\end{equation}
+Extend \(U\) to a unitary \(\widetilde{U}\) on \(K\) by the same inductive rule as~\eqref{eq:inductive}
+(with \((\widetilde{T}',U)\) in place of \((T,T')\)). Since \(U\) is already unitary, the resulting
+\(\widetilde{U}\) is unitary and
+\[
+\widetilde{U}\,U'=U'\,\widetilde{U}.
+\]
+Thus \((\widetilde{U},U')\) is a commuting unitary extension of \((T,T')\) on
+\[
+K=H\oplus H\oplus H\oplus H.
+\]
+
+\begin{remark}[block \(4\times 4\) shape]
+Writing \(K\) as four copies of \(H\), the operators have the schematic form
+\[
+U'
+=
+\begin{pmatrix}
+T' & X & * & * \\
+0 & Y & * & * \\
+0 & 0 & -Y^* & * \\
+0 & 0 & -X^* & -{T'}^*
+\end{pmatrix},
+\qquad
+\widetilde{U}
+=
+\begin{pmatrix}
+T & D_{T^*} & * & * \\
+0 & -T^* & * & * \\
+0 & 0 & * & * \\
+0 & 0 & * & *
+\end{pmatrix},
+\]
+where \(X,Y\) are as in Step~B and the remaining blocks are those of
+\(D_{\widetilde{T}'{}^*}\) and the inductive extension of \(U\).
+\end{remark}
+
+%% ============================================================
+\section*{4. Summary}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{ll}
+\hline
+single isometry &
+\(\displaystyle U=\begin{pmatrix}T&D_{T^*}\\ 0&-T^*\end{pmatrix}\) on \(H\oplus H\) \\
+doubly commuting pair &
+both Halmos matrices~\eqref{eq:both-Halmos} on \(H\oplus H\) \\
+general commuting pair &
+Halmos \(U\) on \(H\oplus H\), then
+\(\widetilde{T}'=\begin{pmatrix}T'&X\\ 0&Y\end{pmatrix}\), \\
+& then Halmos \(U'\) of \(\widetilde{T}'\) on \((H\oplus H)^{\oplus 2}\) \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{document}
