@@ -1,0 +1,323 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{Explicit block-matrix unitary extensions of commuting isometries}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent
+Let \(T,T'\in B(H)\) be isometries with \(TT'=T'T\).
+We give \emph{explicit block operator matrices} for commuting unitary extensions \(U,U'\).
+
+\bigskip
+%% ------------------------------------------------------------------
+\section*{0. Notation}
+Let
+\[
+\mathcal{D}_*=\ker T^*=H\ominus TH,\qquad
+\mathcal{D}'_*=\ker{T'}^*=H\ominus T'H.
+\]
+Write \(\ell^2(\mathbb{N},\mathcal{E})=\bigoplus_{n=1}^\infty\mathcal{E}\) and
+\(\ell^2(\mathbb{Z},\mathcal{E})=\bigoplus_{n\in\mathbb{Z}}\mathcal{E}\).
+Let \(S_{\mathcal{E}}\) denote the unilateral shift on \(\ell^2(\mathbb{N},\mathcal{E})\), so
+\[
+S_{\mathcal{E}}(e_1,e_2,e_3,\dots)=(0,e_1,e_2,\dots),\qquad
+S_{\mathcal{E}}^*(e_1,e_2,e_3,\dots)=(e_2,e_3,\dots).
+\]
+Let \(J_{\mathcal{E}}:\mathcal{E}\hookrightarrow H\) be the inclusion (when \(\mathcal{E}\subset H\)), and define
+\[
+E_{\mathcal{E}}:\ell^2(\mathbb{N},\mathcal{E})\to H,\qquad
+E_{\mathcal{E}}(e_1,e_2,e_3,\dots)=J_{\mathcal{E}}e_1.
+\]
+Thus \(E_{\mathcal{E}}^*h=(P_{\mathcal{E}}h,0,0,\dots)\).
+
+\bigskip
+%% ------------------------------------------------------------------
+\section*{1. Unitary extension of a single isometry (block \(2\times 2\))}
+
+\begin{lemma}
+Let \(V\in B(H)\) be an isometry and set \(\mathcal{D}=\ker V^*\).
+On the space
+\[
+K_V=\ell^2(\mathbb{N},\mathcal{D})\oplus H,
+\]
+the block operator matrix
+\begin{equation}
+\label{eq:single-U}
+U_V
+=
+\begin{pmatrix}
+S_{\mathcal{D}}^* & 0 \\
+E_{\mathcal{D}} & V
+\end{pmatrix}
+\end{equation}
+is a unitary extension of \(V\): \(U_V\big|_H=V\). Minimality means
+\(K_V=\bigvee_{n\in\mathbb{Z}}U_V^n H\).
+\end{lemma}
+
+\begin{proof}
+For \((x,h)\in \ell^2(\mathbb{N},\mathcal{D})\oplus H\),
+\[
+U_V\begin{pmatrix}x\\ h\end{pmatrix}
+=
+\begin{pmatrix}S_{\mathcal{D}}^*x\\ Vh+E_{\mathcal{D}}x\end{pmatrix}.
+\]
+Since \(E_{\mathcal{D}}x\in\mathcal{D}=H\ominus VH\),
+\begin{align*}
+\bigl\|U_V(x,h)\bigr\|^2
+&=\|S_{\mathcal{D}}^*x\|^2+\|Vh\|^2+\|E_{\mathcal{D}}x\|^2
+=\bigl(\|x\|^2-\|e_1\|^2\bigr)+\|h\|^2+\|e_1\|^2
+=\|x\|^2+\|h\|^2.
+\end{align*}
+So \(U_V\) is isometric. Given \((y,k)\), set \(x=(P_{\mathcal{D}}k,y_1,y_2,\dots)\) and
+\(h=V^*k\). Then \(S_{\mathcal{D}}^*x=y\) and \(Vh+E_{\mathcal{D}}x=k\), so \(U_V\) is
+surjective, hence unitary. Clearly \(U_V(0,h)=(0,Vh)\).
+\end{proof}
+
+\noindent
+In particular, the unitary extension of \(T\) is the block matrix
+\begin{equation}
+\label{eq:U-of-T}
+U
+=
+\begin{pmatrix}
+S_{\mathcal{D}_*}^* & 0 \\
+E_{\mathcal{D}_*} & T
+\end{pmatrix}
+\quad\text{on}\quad
+K_1=\ell^2(\mathbb{N},\mathcal{D}_*)\oplus H.
+\end{equation}
+
+\bigskip
+%% ------------------------------------------------------------------
+\section*{2. The commuting extension \(\widetilde{T}'\) on \(K_1\) (block form)}
+
+Identify the standard orthonormal ``past'' basis vectors with negative powers of \(U\):
+\[
+U^{-n}d=(0,\dots,0,d,0,\dots;0)\in K_1
+\qquad(d\in\mathcal{D}_*,\ n\ge 1).
+\]
+The inductive formula \(\widetilde{T}'(U^n h)=U^n T'h\) (\(n\in\mathbb{Z}\), \(h\in H\)) yields an
+isometry \(\widetilde{T}'\) on \(K_1\) with \(\widetilde{T}'\big|_H=T'\) and
+\(\widetilde{T}'U=U\widetilde{T}'\).
+
+When \(T,T'\) \emph{doubly} commute (\(T^*T'=T'T^*\)), one has
+\(T'\mathcal{D}_*\subset\mathcal{D}_*\), so \(\Gamma:=T'|_{\mathcal{D}_*}\) is an isometry and
+\begin{equation}
+\label{eq:double-block}
+\widetilde{T}'
+=
+\begin{pmatrix}
+I_{\ell^2(\mathbb{N})}\otimes\Gamma & 0 \\
+0 & T'
+\end{pmatrix}
+\quad\text{on}\quad
+\ell^2(\mathbb{N},\mathcal{D}_*)\oplus H.
+\end{equation}
+In the general (not doubly commuting) case, \(\widetilde{T}'\) mixes the past with \(H\), and the
+cleanest fully explicit matrices for \emph{both} unitaries simultaneously are the Berger--Coburn--Lebow
+Laurent matrices of Section~3.
+
+\medskip
+If \(\widetilde{T}'\) is not yet unitary, apply~\eqref{eq:single-U} to \(\widetilde{T}'\) on \(K_1\):
+with \(\mathcal{D}_{\sim}=\ker\widetilde{T}'{}^*\),
+\begin{equation}
+\label{eq:Uprime}
+U'
+=
+\begin{pmatrix}
+S_{\mathcal{D}_{\sim}}^* & 0 \\
+E_{\mathcal{D}_{\sim}} & \widetilde{T}'
+\end{pmatrix}
+\quad\text{on}\quad
+K=\ell^2(\mathbb{N},\mathcal{D}_{\sim})\oplus K_1,
+\end{equation}
+and extend \(U\) to a unitary \(\widetilde{U}\) on \(K\) by the same inductive rule
+(replace \((T,T')\) by \((\widetilde{T}',U)\)). Then \(\widetilde{U},U'\) are commuting unitaries
+extending \(T,T'\).
+
+\bigskip
+%% ------------------------------------------------------------------
+\section*{3. Fully explicit Laurent matrices (pure case): BCL model}
+
+Assume the product \(TT'\) is a \emph{pure} isometry (equivalently
+\((TT')^{*n}\to 0\) strongly). Set
+\[
+\mathcal{W}=\ker(TT')^*=H\ominus TT'H.
+\]
+Let
+\[
+W_1=\ker T^*=\mathcal{D}_*,\qquad
+W_2=\ker{T'}^*=\mathcal{D}'.
+\]
+One has the orthogonal decompositions
+\[
+\mathcal{W}=W_1\oplus T'W_1=W_2\oplus TW_2
+\]
+(up to the usual identification of wandering subspaces for a pure pair). Define a unitary
+\(U_{\mathcal{W}}\) on \(\mathcal{W}\) and an orthogonal projection \(P\) on \(\mathcal{W}\) by the
+Berger--Coburn--Lebow formulae
+\begin{equation}
+\label{eq:UW-P}
+U_{\mathcal{W}}
+=
+\begin{pmatrix}
+T'\big|_{W_1} & 0 \\
+0 & T^*\big|_{TW_2}
+\end{pmatrix}
+:
+W_1\oplus TW_2
+\;\longrightarrow\;
+T'W_1\oplus W_2,
+\qquad
+P=P_{W_2}.
+\end{equation}
+(Other equivalent normalizations replace \(P_{W_2}\) by \(P_{W_1}\).)
+
+\begin{theorem}[BCL unitary extensions]
+Identify \(H\) with the Hardy space \(H^2(\mathcal{W})\subset L^2(\mathbb{T};\mathcal{W})\), so that
+\[
+T\simeq M_{\Phi},\quad
+T'\simeq M_{\Psi}
+\quad\text{on }H^2(\mathcal{W}),
+\]
+where the \(\mathrm{B}(\mathcal{W})\)-valued inner functions
+\begin{equation}
+\label{eq:PhiPsi}
+\Phi(z)=U_{\mathcal{W}}^*\bigl(P+zP^\perp\bigr),
+\qquad
+\Psi(z)=\bigl(P^\perp+zP\bigr)U_{\mathcal{W}}
+\end{equation}
+are \emph{unitary-valued for a.e.\ \(z\in\mathbb{T}\)}. Consequently the multiplication operators
+\begin{equation}
+\label{eq:UU-L2}
+U=M_{\Phi},\qquad U'=M_{\Psi}
+\quad\text{on}\quad
+K=L^2(\mathbb{T};\mathcal{W})
+\end{equation}
+are commuting unitaries, and
+\[
+U\big|_{H^2(\mathcal{W})}=T,\qquad
+U'\big|_{H^2(\mathcal{W})}=T'.
+\]
+\end{theorem}
+
+\subsection*{Laurent block matrices on \(\ell^2(\mathbb{Z},\mathcal{W})\)}
+
+Under the Fourier identification \(L^2(\mathbb{T};\mathcal{W})\cong\ell^2(\mathbb{Z},\mathcal{W})\),
+write vectors \(\xi=(\xi_n)_{n\in\mathbb{Z}}\), \(\xi_n\in\mathcal{W}\). Then~\eqref{eq:PhiPsi}
+become the bi-infinite Laurent matrices
+\begin{equation}
+\label{eq:Laurent-U}
+\boxed{
+\begin{aligned}
+(U\xi)_n
+&=
+U_{\mathcal{W}}^*P\,\xi_n
++
+U_{\mathcal{W}}^*P^\perp\,\xi_{n-1},
+\\[1mm]
+(U'\xi)_n
+&=
+P^\perp U_{\mathcal{W}}\,\xi_n
++
+P\,U_{\mathcal{W}}\,\xi_{n-1}.
+\end{aligned}
+}
+\end{equation}
+Equivalently, as operator matrices with respect to \(\bigoplus_{n\in\mathbb{Z}}\mathcal{W}\),
+\begin{equation}
+\label{eq:matrix-form}
+U
+=
+\begin{pmatrix}
+\ddots & & & & \\
+& U_{\mathcal{W}}^*P & 0 & & \\
+& U_{\mathcal{W}}^*P^\perp & U_{\mathcal{W}}^*P & 0 & \\
+& 0 & U_{\mathcal{W}}^*P^\perp & U_{\mathcal{W}}^*P & \\
+& & & & \ddots
+\end{pmatrix},
+\qquad
+U'
+=
+\begin{pmatrix}
+\ddots & & & & \\
+& P^\perp U_{\mathcal{W}} & 0 & & \\
+& P\,U_{\mathcal{W}} & P^\perp U_{\mathcal{W}} & 0 & \\
+& 0 & P\,U_{\mathcal{W}} & P^\perp U_{\mathcal{W}} & \\
+& & & & \ddots
+\end{pmatrix}.
+\end{equation}
+The subspace \(H\simeq H^2(\mathcal{W})\) is \(\bigoplus_{n\ge 0}\mathcal{W}\), which is invariant under
+both \(U\) and \(U'\), and the compressions / restrictions recover \(T,T'\).
+
+\begin{proof}[Proof that \(U,U'\) are commuting unitaries extending \(T,T'\)]
+For a.e.\ \(z\in\mathbb{T}\), \(P+zP^\perp\) is unitary on \(\mathcal{W}\) (it is a
+symmetry times a unimodular scalar on the two reducing subspaces \(\operatorname{Ran}P\) and
+\(\operatorname{Ran}P^\perp\)). Since \(U_{\mathcal{W}}\) is unitary, both \(\Phi(z)\) and
+\(\Psi(z)\) are unitary. Hence \(M_{\Phi}\) and \(M_{\Psi}\) are unitary on
+\(L^2(\mathbb{T};\mathcal{W})\). They commute because the \(\mathrm{B}(\mathcal{W})\)-valued
+functions \(\Phi,\Psi\) commute pointwise:
+\[
+\Phi(z)\Psi(z)=U_{\mathcal{W}}^*(P+zP^\perp)(P^\perp+zP)U_{\mathcal{W}}
+=z\,I
+=\Psi(z)\Phi(z).
+\]
+Restriction to \(H^2(\mathcal{W})\) yields commuting isometries unitarily equivalent to
+\((T,T')\) by the BCL theorem. The formulae~\eqref{eq:Laurent-U}--\eqref{eq:matrix-form}
+are the Fourier expansions of multiplication by~\eqref{eq:PhiPsi}.
+\end{proof}
+
+\bigskip
+%% ------------------------------------------------------------------
+\section*{4. Non-pure case}
+
+In general, let \(H_u=\bigcap_{n\ge 0}(TT')^n H\) be the maximal subspace reducing \(TT'\) to a
+unitary (Suciu / BCL). Then \(H=H_u\oplus H_s\) reduces both \(T\) and \(T'\), with
+\((T|_{H_u},T'|_{H_u})\) already unitary, and \((T|_{H_s},T'|_{H_s})\) pure. Apply
+Section~3 on \(H_s\) and take the direct sum with the unitary pair on \(H_u\):
+\[
+U=T|_{H_u}\oplus M_{\Phi},
+\qquad
+U'=T'|_{H_u}\oplus M_{\Psi}
+\quad\text{on}\quad
+K=H_u\oplus L^2(\mathbb{T};\mathcal{W}).
+\]
+
+\bigskip
+%% ------------------------------------------------------------------
+\section*{5. Summary: the matrices to copy}
+
+\begin{itemize}
+\item \textbf{One isometry.} On \(\ell^2(\mathbb{N},\ker V^*)\oplus H\),
+\[
+U_V=\begin{pmatrix}S^*&0\\ E&V\end{pmatrix}.
+\]
+
+\item \textbf{Commuting pair, pure product (main explicit form).} On
+\(\ell^2(\mathbb{Z},\mathcal{W})\), with \(U_{\mathcal{W}},P\) from~\eqref{eq:UW-P},
+\[
+(U\xi)_n=U_{\mathcal{W}}^*P\,\xi_n+U_{\mathcal{W}}^*P^\perp\,\xi_{n-1},
+\qquad
+(U'\xi)_n=P^\perp U_{\mathcal{W}}\,\xi_n+P\,U_{\mathcal{W}}\,\xi_{n-1}.
+\]
+
+\item \textbf{Doubly commuting special case.} On
+\(\ell^2(\mathbb{N},\mathcal{D}_*)\oplus H\),
+\[
+U=\begin{pmatrix}S_{\mathcal{D}_*}^*&0\\ E_{\mathcal{D}_*}&T\end{pmatrix},
+\qquad
+\widetilde{T}'=\begin{pmatrix}I\otimes T'|_{\mathcal{D}_*}&0\\ 0&T'\end{pmatrix},
+\]
+then unitarize \(\widetilde{T}'\) by~\eqref{eq:single-U} and extend \(U\) in parallel.
+\end{itemize}
+
+\end{document}
