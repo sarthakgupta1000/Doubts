@@ -1,0 +1,305 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\begin{document}
+
+\section*{Detailed derivation of the block conditions for \(X,Y\)}
+
+\subsection*{Setup}
+Let \(T,T'\in B(H)\) be isometries with \(TT'=T'T\) (commuting only).
+Set
+\[
+D:=D_{T^*}=(I-TT^*)^{1/2}=P_{\ker T^*}.
+\]
+Halmos unitary extension of \(T\) on \(H\oplus H\):
+\[
+U_0=\begin{pmatrix} T & D \\ 0 & -T^* \end{pmatrix},
+\qquad
+U_0^*=\begin{pmatrix} T^* & 0 \\ D & -T \end{pmatrix}.
+\]
+Let \(\mathcal{M}=\bigvee_{n\in\mathbb{Z}}U_0^n(H\oplus 0)\) and \(U=U_0\big|_{\mathcal{M}}\).
+Define \(\widetilde{T}'\) on \(\mathcal{M}\) by
+\begin{equation}
+\label{eq:def}
+\widetilde{T}'(U^n h)=U^n(T'h)\qquad(n\in\mathbb{Z},\,h\in H).
+\end{equation}
+Then \(\widetilde{T}'|_H=T'\) and \(\widetilde{T}'U=U\widetilde{T}'\).
+
+Identify \(h\in H\) with \(\begin{pmatrix}h\\ 0\end{pmatrix}\in\mathcal{M}\).
+
+\bigskip
+%% ============================================================
+\section*{Part A --- Block shape \(\displaystyle\widetilde{T}'=\begin{pmatrix}T'&X\\ 0&Y\end{pmatrix}\)}
+
+From~\eqref{eq:def} with \(n=0\),
+\[
+\widetilde{T}'\begin{pmatrix}h\\ 0\end{pmatrix}
+=
+\begin{pmatrix}T'h\\ 0\end{pmatrix}.
+\]
+So \(H\oplus 0\) is invariant under \(\widetilde{T}'\), and the action there is \(T'\).
+Any bounded operator on (a reducing piece of) \(H\oplus H\) with this property has the block form
+\begin{equation}
+\label{eq:block}
+\boxed{
+\widetilde{T}'
+=
+\begin{pmatrix}
+T' & X \\
+0 & Y
+\end{pmatrix}
+}
+\end{equation}
+for unique \(X,Y\in B(H)\) (defined on the second-summand part of \(\mathcal{M}\)). Explicitly,
+\begin{equation}
+\label{eq:action}
+\widetilde{T}'\begin{pmatrix}x\\ y\end{pmatrix}
+=
+\begin{pmatrix}
+T'x+Xy\\
+Yy
+\end{pmatrix}.
+\end{equation}
+The bottom-left zero is exactly the statement that \(\widetilde{T}'\) extends \(T'\)
+(first slot invariant, no feed from \(H\) into the second slot).
+
+\bigskip
+%% ============================================================
+\section*{Part B --- Values on the defect: what \(X,Y\) do to \(\ker T^*\)}
+
+\begin{lemma}
+For every \(h\in H\),
+\begin{equation}
+\label{eq:Ustar}
+U^*\begin{pmatrix}h\\ 0\end{pmatrix}
+=
+\begin{pmatrix}T^*h\\ Dh\end{pmatrix}.
+\end{equation}
+In particular, if \(d\in\ker T^*\), then \(T^*d=0\), \(Dd=d\), so
+\begin{equation}
+\label{eq:past}
+\begin{pmatrix}0\\ d\end{pmatrix}
+=
+U^*\begin{pmatrix}d\\ 0\end{pmatrix}.
+\end{equation}
+\end{lemma}
+
+\begin{proposition}[correct defect formulae]
+For every \(d\in\ker T^*\),
+\begin{equation}
+\label{eq:XY-d}
+\boxed{
+\widetilde{T}'\begin{pmatrix}0\\ d\end{pmatrix}
+=
+\begin{pmatrix}
+T^*T'd\\
+D\,T'd
+\end{pmatrix}.
+}
+\end{equation}
+Comparing with~\eqref{eq:action},
+\begin{equation}
+\label{eq:XY-on-d}
+\boxed{Xd=T^*T'd,\qquad Yd=D\,T'd.}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Use~\eqref{eq:past} and commutation \(\widetilde{T}'U^*=U^*\widetilde{T}'\):
+\begin{align*}
+\widetilde{T}'\begin{pmatrix}0\\ d\end{pmatrix}
+&=
+\widetilde{T}'\,U^*\begin{pmatrix}d\\ 0\end{pmatrix}
+=
+U^*\,\widetilde{T}'\begin{pmatrix}d\\ 0\end{pmatrix}
+=
+U^*\begin{pmatrix}T'd\\ 0\end{pmatrix}
+=
+\begin{pmatrix}T^*(T'd)\\ D(T'd)\end{pmatrix}.
+\end{align*}
+On the other hand, by~\eqref{eq:action},
+\[
+\widetilde{T}'\begin{pmatrix}0\\ d\end{pmatrix}
+=
+\begin{pmatrix}Xd\\ Yd\end{pmatrix}.
+\]
+Equating components yields~\eqref{eq:XY-on-d}.
+\end{proof}
+
+\begin{remark}[important correction]
+One does \emph{not} in general have \(Xd=0\). That would require \(T^*T'd=0\), i.e.\
+\(T'd\in\ker T^*\), i.e.\
+\[
+\langle T'd,\,Th\rangle=\langle d,\,{T'}^*Th\rangle=0\quad(\forall h),
+\]
+which holds automatically for all \(d\in\ker T^*\) if and only if
+\({T'}^*T=T{T'}^*\) on \(H\) --- equivalent to double commutativity
+\(T^*T'=T'T^*\). In the merely commuting case, \(Xd=T^*T'd\) may be nonzero.
+(The identity \(Yd=DT'd\) is always correct.)
+\end{remark}
+
+\begin{remark}[norm check]
+For \(d\in\ker T^*\),
+\[
+\|Xd\|^2+\|Yd\|^2
+=
+\|T^*T'd\|^2+\|DT'd\|^2
+=
+\|T'd\|^2
+=
+\|d\|^2,
+\]
+so~\eqref{eq:XY-on-d} is compatible with isometry of \(\widetilde{T}'\).
+\end{remark}
+
+\bigskip
+%% ============================================================
+\section*{Part C --- Commutation \(\widetilde{T}'U=U\widetilde{T}'\)}
+
+Compute, with~\eqref{eq:block},
+\begin{align*}
+\widetilde{T}'U_0
+&=
+\begin{pmatrix}T'&X\\ 0&Y\end{pmatrix}
+\begin{pmatrix}T&D\\ 0&-T^*\end{pmatrix}
+=
+\begin{pmatrix}
+T'T & T'D-XT^* \\
+0 & -YT^*
+\end{pmatrix},
+\\[1mm]
+U_0\widetilde{T}'
+&=
+\begin{pmatrix}T&D\\ 0&-T^*\end{pmatrix}
+\begin{pmatrix}T'&X\\ 0&Y\end{pmatrix}
+=
+\begin{pmatrix}
+TT' & TX+DY \\
+0 & -T^*Y
+\end{pmatrix}.
+\end{align*}
+
+\begin{proposition}
+On \(\mathcal{M}\), \(\widetilde{T}'U=U\widetilde{T}'\) holds if and only if
+\begin{equation}
+\label{eq:comm}
+\boxed{
+YT^*=T^*Y,
+\qquad
+T'D-XT^*=TX+DY.
+}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The \((1,1)\)-blocks agree by \(TT'=T'T\). Equating \((2,2)\) gives
+\(YT^*=T^*Y\). Equating \((1,2)\) gives \(T'D-XT^*=TX+DY\).
+\end{proof}
+
+\paragraph{Meaning of \(YT^*=T^*Y\).}
+\(Y\) intertwines \(T^*\) with itself. So \(Y\) preserves the spectral / Wold structure
+of \(T^*\) (it maps \(\ker T^*\) into itself up to the unitary part, etc.).
+
+\paragraph{Meaning of \(T'D-XT^*=TX+DY\).}
+The Halmos operator \(U_0\) mixes the two slots through the off-diagonal \(D\).
+For \(\widetilde{T}'\) to commute with that mixing, the ``naive'' action \(T'D\) on the
+defect must be corrected by the unknown \(X\). Rewrite the identity as
+\begin{equation}
+\label{eq:X-solve}
+X T^* + T X
+=
+T'D-DY.
+\end{equation}
+On \(\operatorname{Ran}D=\ker T^*\) one has \(T^*|_{\ker T^*}=0\), so~\eqref{eq:X-solve}
+reduces to a formula for \(TX\) in terms of known data once \(Y\) is known on the defect;
+together with~\eqref{eq:XY-on-d} this determines the germ of \(X,Y\) on the wandering
+subspace. The inductive definition~\eqref{eq:def} then propagates the values to all of
+\(\mathcal{M}\) via powers of \(U\).
+
+\bigskip
+%% ============================================================
+\section*{Part D --- Isometry \(\widetilde{T}'{}^*\widetilde{T}'=I\)}
+
+\begin{proposition}
+\(\widetilde{T}'\) in~\eqref{eq:block} is an isometry iff
+\begin{equation}
+\label{eq:isom}
+\boxed{
+{T'}^*X=0,
+\qquad
+X^*X+Y^*Y=I.
+}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+\[
+{\widetilde{T}'}^*\widetilde{T}'
+=
+\begin{pmatrix}{T'}^*&0\\ X^*&Y^*\end{pmatrix}
+\begin{pmatrix}T'&X\\ 0&Y\end{pmatrix}
+=
+\begin{pmatrix}
+I & {T'}^*X \\
+X^*T' & X^*X+Y^*Y
+\end{pmatrix}.
+\]
+\end{proof}
+
+\paragraph{Meaning of \({T'}^*X=0\).}
+\(\operatorname{Ran}X\subset\ker{T'}^*=H\ominus T'H\): the off-diagonal \(X\) lands in the
+defect space of \(T'\).
+
+\paragraph{Meaning of \(X^*X+Y^*Y=I\).}
+On the second Halmos slot, the column \(\begin{pmatrix}X\\ Y\end{pmatrix}\) is an isometry:
+it splits the second slot between the two output slots without losing norm
+(cf.\ the norm check after~\eqref{eq:XY-on-d}).
+
+\bigskip
+%% ============================================================
+\section*{Part E --- How the pieces fit together}
+
+\begin{enumerate}
+\item \textbf{Definition~\eqref{eq:def}} produces a concrete isometry \(\widetilde{T}'\) commuting
+with \(U\) and extending \(T'\). Existence is free; no double commutativity is used
+(only \(TT'=T'T\) in the inner-product computation that makes~\eqref{eq:def}
+well-defined).
+
+\item \textbf{Invariance of \(H\)} \(\Rightarrow\) block shape
+\(\begin{pmatrix}T'&X\\ 0&Y\end{pmatrix}\).
+
+\item \textbf{Evaluate on the Halmos past} \(\{0\}\oplus\ker T^*\) via \(U^*\)
+\(\Rightarrow\)
+\[
+Xd=T^*T'd,\qquad Yd=DT'd.
+\]
+
+\item \textbf{Full commutation of blocks} \(\Rightarrow\)
+\[
+YT^*=T^*Y,\qquad T'D-XT^*=TX+DY.
+\]
+
+\item \textbf{Isometry of blocks} \(\Rightarrow\)
+\[
+{T'}^*X=0,\qquad X^*X+Y^*Y=I.
+\]
+\end{enumerate}
+
+The operators \(X,Y\) are uniquely determined by~\eqref{eq:def}; the displayed
+equations are simply that construction rewritten in Halmos coordinates.
+
+\bigskip
+\begin{remark}[contrast with double commutativity]
+If one \emph{also} had \(T^*T'=T'T^*\), then \(T'd\in\ker T^*\) for \(d\in\ker T^*\),
+hence \(Xd=T^*T'd=0\) and \(Yd=T'd\). In that case one may take
+\[
+X=D_{{T'}^*},\qquad Y=-{T'}^*,
+\]
+i.e.\ \(\widetilde{T}'\) itself is the Halmos matrix of \(T'\). For a merely commuting
+pair this shortcut fails, and \(X,Y\) remain the (generally different) operators
+cut out by~\eqref{eq:def}.
+\end{remark}
+
+\end{document}

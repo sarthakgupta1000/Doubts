@@ -1,0 +1,351 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{Commuting unitary extensions of a commuting pair of isometries}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{theorem}
+\label{thm:main}
+Let \(H\) be a complex Hilbert space and let \(T,T'\in B(H)\) be isometries
+satisfying \(TT'=T'T\). Then there exist a Hilbert space \(K\supset H\) and
+unitaries \(U,U'\in B(K)\) such that
+\[
+U\big|_H=T,\qquad
+U'\big|_H=T',\qquad
+UU'=U'U.
+\]
+In particular, \(H\) is invariant under both \(U\) and \(U'\).
+\end{theorem}
+
+\noindent
+The proof is the classical inductive construction via minimal unitary extensions.
+We first record the single-operator fact, then extend the second isometry, then
+unitarize.
+
+\bigskip
+%% ============================================================
+\section*{Preliminary: minimal unitary extension of one isometry}
+
+\begin{lemma}[Wold]
+\label{lem:wold}
+Let \(V\in B(H)\) be an isometry. Then there is an orthogonal decomposition
+\(H=H_u\oplus H_s\) reducing \(V\), with \(V\big|_{H_u}\) unitary and
+\(V\big|_{H_s}\) a unilateral shift. Writing \(L=H_s\ominus VH_s=\ker(V^*\big|_{H_s})\)
+and identifying \(H_s\cong\bigoplus_{n\ge 0}L\), the bilateral shift \(\widetilde{S}\) on
+\(K_s=\bigoplus_{n\in\mathbb{Z}}L\) is a unitary extension of \(V\big|_{H_s}\).
+Consequently
+\[
+U_V:=V\big|_{H_u}\oplus\widetilde{S}
+\quad\text{on}\quad
+K_V:=H_u\oplus K_s
+\]
+is a unitary extension of \(V\). It is \emph{minimal} in the sense that
+\begin{equation}
+\label{eq:minimal}
+K_V=\bigvee_{n\in\mathbb{Z}}U_V^n H.
+\end{equation}
+Moreover \(U_V^k\big|_H=V^k\) for every integer \(k\ge 0\).
+\end{lemma}
+
+\begin{remark}
+The Halmos matrix
+\(\displaystyle\begin{pmatrix}V&D_{V^*}\\ 0&-V^*\end{pmatrix}\)
+on \(H\oplus H\) is always a unitary extension of an isometry \(V\), but it is
+\emph{not} always minimal. The inductive construction below requires
+minimality~\eqref{eq:minimal}, so we use Lemma~\ref{lem:wold}.
+\end{remark}
+
+\bigskip
+%% ============================================================
+\section*{Step 1 --- Minimal unitary extension of \(T\)}
+
+Apply Lemma~\ref{lem:wold} to \(T\). Let \(U\) be a minimal unitary extension of
+\(T\) on
+\begin{equation}
+\label{eq:Htilde}
+\widetilde{H}
+=
+\bigvee_{n\in\mathbb{Z}}U^n H.
+\end{equation}
+Thus
+\begin{equation}
+\label{eq:U-powers}
+U\big|_H=T,
+\qquad
+U^k\big|_H=T^k\quad(k\ge 0).
+\end{equation}
+
+\bigskip
+%% ============================================================
+\section*{Step 2 --- Isometric extension of \(T'\) commuting with \(U\)}
+
+On the dense linear manifold of finite sums
+\(\sum_{n\in\mathbb{Z}}U^n h_n\) with \(h_n\in H\), define
+\begin{equation}
+\label{eq:def-Ttilde}
+\widetilde{T}'\Biggl(\sum_{n\in\mathbb{Z}}U^n h_n\Biggr)
+=
+\sum_{n\in\mathbb{Z}}U^n\,(T'h_n).
+\end{equation}
+
+\begin{lemma}
+\label{lem:Ttilde}
+The formula~\eqref{eq:def-Ttilde} is well-defined and extends by continuity to an
+isometry \(\widetilde{T}'\) on all of \(\widetilde{H}\), satisfying
+\begin{enumerate}
+\item[\rm(i)] \(\widetilde{T}'\big|_H=T'\),
+\item[\rm(ii)] \(\widetilde{T}'\,U=U\,\widetilde{T}'\),
+\item[\rm(iii)] if \(T'\) is unitary, then \(\widetilde{T}'\) is unitary.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+It is enough to check that~\eqref{eq:def-Ttilde} preserves inner products on
+finite sums. By sesquilinearity it suffices to compare
+\(\langle U^n(T'h),\,U^m(T'g)\rangle\) with \(\langle U^n h,\,U^m g\rangle\) for
+\(h,g\in H\) and \(n,m\in\mathbb{Z}\).
+
+Assume first \(n\ge m\). Then, using that \(U\) is unitary,
+\begin{align*}
+\bigl\langle U^n(T'h),\,U^m(T'g)\bigr\rangle
+&=
+\bigl\langle U^{n-m}(T'h),\,T'g\bigr\rangle.
+\end{align*}
+Here \(n-m\ge 0\) and \(T'h\in H\), so~\eqref{eq:U-powers} gives
+\(U^{n-m}(T'h)=T^{n-m}(T'h)\). Hence
+\begin{align*}
+\bigl\langle U^{n-m}(T'h),\,T'g\bigr\rangle
+&=
+\bigl\langle T^{n-m}T'h,\,T'g\bigr\rangle
+=
+\bigl\langle T'T^{n-m}h,\,T'g\bigr\rangle
+\\
+&=
+\bigl\langle T^{n-m}h,\,g\bigr\rangle
+=
+\bigl\langle U^{n-m}h,\,g\bigr\rangle
+=
+\bigl\langle U^n h,\,U^m g\bigr\rangle,
+\end{align*}
+where the second equality used \(T^kT'=T'T^k\) (which follows by induction from
+\(TT'=T'T\)), and the third used that \(T'\) is an isometry. The case \(m>n\) is
+symmetric (or apply the same argument to the adjoint pairing).
+
+Therefore~\eqref{eq:def-Ttilde} is well-defined and isometric on a dense
+subspace, so it extends uniquely to an isometry \(\widetilde{T}'\) on
+\(\widetilde{H}\).
+
+(i) Take only the \(n=0\) term in~\eqref{eq:def-Ttilde}.
+
+(ii) On finite sums,
+\begin{align*}
+\widetilde{T}'U\Biggl(\sum_n U^n h_n\Biggr)
+&=
+\widetilde{T}'\Biggl(\sum_n U^{n+1}h_n\Biggr)
+=
+\sum_n U^{n+1}(T'h_n)
+=
+U\widetilde{T}'\Biggl(\sum_n U^n h_n\Biggr).
+\end{align*}
+By density and continuity, \(\widetilde{T}'U=U\widetilde{T}'\) on
+\(\widetilde{H}\).
+
+(iii) If \(T'\) is unitary then \(\operatorname{Ran}T'=H\), so
+\[
+\operatorname{Ran}\widetilde{T}'
+\supset
+\bigvee_{n\in\mathbb{Z}}U^n(\operatorname{Ran}T')
+=
+\bigvee_{n\in\mathbb{Z}}U^n H
+=
+\widetilde{H}.
+\]
+An isometry with dense range is unitary.
+\end{proof}
+
+\bigskip
+%% ============================================================
+\section*{Step 3 --- Unitarize \(\widetilde{T}'\) and extend \(U\)}
+
+If \(\widetilde{T}'\) is already unitary, set \(K=\widetilde{H}\) and \(U'=\widetilde{T}'\).
+Then \((U,U')\) satisfies the claim of Theorem~\ref{thm:main}.
+
+Now suppose \(\widetilde{T}'\) is not unitary. Apply Lemma~\ref{lem:wold} to the
+isometry \(\widetilde{T}'\) on \(\widetilde{H}\): let \(U'\) be a minimal unitary
+extension of \(\widetilde{T}'\) on
+\begin{equation}
+\label{eq:K}
+K
+=
+\bigvee_{n\in\mathbb{Z}}(U')^n\widetilde{H}.
+\end{equation}
+Thus
+\begin{equation}
+\label{eq:Uprime-powers}
+U'\big|_{\widetilde{H}}=\widetilde{T}',
+\qquad
+(U')^k\big|_{\widetilde{H}}=(\widetilde{T}')^k\quad(k\ge 0).
+\end{equation}
+
+Define an operator \(\widetilde{U}\) on the dense manifold of finite sums
+\(\sum_{n\in\mathbb{Z}}(U')^n\xi_n\) with \(\xi_n\in\widetilde{H}\) by
+\begin{equation}
+\label{eq:def-Utilde}
+\widetilde{U}\Biggl(\sum_{n\in\mathbb{Z}}(U')^n\xi_n\Biggr)
+=
+\sum_{n\in\mathbb{Z}}(U')^n\,(U\xi_n).
+\end{equation}
+
+\begin{lemma}
+\label{lem:Utilde}
+The formula~\eqref{eq:def-Utilde} is well-defined and extends to a unitary
+operator \(\widetilde{U}\) on \(K\) such that
+\begin{enumerate}
+\item[\rm(i)] \(\widetilde{U}\big|_{\widetilde{H}}=U\) (hence \(\widetilde{U}\big|_H=T\)),
+\item[\rm(ii)] \(\widetilde{U}\,U'=U'\,\widetilde{U}\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+As in Lemma~\ref{lem:Ttilde}, compare inner products. For
+\(\xi,\eta\in\widetilde{H}\) and \(n\ge m\),
+\begin{align*}
+\bigl\langle (U')^n(U\xi),\,(U')^m(U\eta)\bigr\rangle
+&=
+\bigl\langle (U')^{n-m}(U\xi),\,U\eta\bigr\rangle
+=
+\bigl\langle (\widetilde{T}')^{n-m}(U\xi),\,U\eta\bigr\rangle
+\\
+&=
+\bigl\langle U(\widetilde{T}')^{n-m}\xi,\,U\eta\bigr\rangle
+=
+\bigl\langle (\widetilde{T}')^{n-m}\xi,\,\eta\bigr\rangle
+=
+\bigl\langle (U')^n\xi,\,(U')^m\eta\bigr\rangle,
+\end{align*}
+where we used~\eqref{eq:Uprime-powers}, the relation
+\(U\widetilde{T}'=\widetilde{T}'U\) from Lemma~\ref{lem:Ttilde}(ii), and that \(U\) is
+an isometry. The case \(m>n\) is symmetric. Thus~\eqref{eq:def-Utilde} defines an
+isometry on a dense subspace of \(K\), and extends to an isometry
+\(\widetilde{U}\) on \(K\).
+
+(i) Take \(n=0\).
+
+(ii) Immediate from~\eqref{eq:def-Utilde} on a dense set.
+
+It remains to check that \(\widetilde{U}\) is surjective (hence unitary). Since \(U\) is
+unitary on \(\widetilde{H}\), one has \(\operatorname{Ran}U=\widetilde{H}\). Therefore
+\[
+\operatorname{Ran}\widetilde{U}
+\supset
+\bigvee_{n\in\mathbb{Z}}(U')^n(\operatorname{Ran}U)
+=
+\bigvee_{n\in\mathbb{Z}}(U')^n\widetilde{H}
+=
+K.
+\]
+So \(\widetilde{U}\) is unitary.
+\end{proof}
+
+\bigskip
+%% ============================================================
+\section*{Conclusion}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Let \(U\) be a minimal unitary extension of \(T\) on \(\widetilde{H}\) as in
+Step~1. Let \(\widetilde{T}'\) be the isometric extension of \(T'\) on
+\(\widetilde{H}\) furnished by Lemma~\ref{lem:Ttilde}. If \(\widetilde{T}'\) is unitary,
+take \(K=\widetilde{H}\) and \(U'=\widetilde{T}'\). Otherwise let \(U'\) and
+\(\widetilde{U}\) be as in Lemma~\ref{lem:Utilde}. In either case one obtains a
+Hilbert space \(K\supset H\) and commuting unitaries on \(K\) extending \(T\) and
+\(T'\).
+\end{proof}
+
+\begin{remark}[minimality]
+One may always replace \(K\) by the joint reducing subspace
+\[
+K_{\min}=\bigvee_{m,n\in\mathbb{Z}}U^m{U'}^n H
+\]
+to obtain a minimal commuting unitary extension.
+\end{remark}
+
+\begin{remark}[arbitrary families]
+The same induction yields a commuting unitary extension for any family
+(finite or infinite) of mutually commuting isometries: unitarize one at a time,
+extending all previously unitarized operators by the formula~\eqref{eq:def-Ttilde}
+at each stage.
+\end{remark}
+
+\bigskip
+%% ============================================================
+\section*{Explicit matrices when \(TT'\) is pure (BCL)}
+
+Assume in addition that \(TT'\) is a pure isometry, i.e.\
+\((TT')^{*n}\to 0\) strongly. Set
+\[
+\mathcal{W}=\ker(TT')^*=H\ominus TT'H,
+\quad
+W_1=\ker T^*,
+\quad
+W_2=\ker{T'}^*.
+\]
+Define a unitary \(U_{\mathcal{W}}\) on \(\mathcal{W}\) and a projection \(P\) by
+\begin{equation}
+\label{eq:UW}
+U_{\mathcal{W}}
+=
+\begin{pmatrix}
+T'\big|_{W_1} & 0 \\
+0 & T^*\big|_{TW_2}
+\end{pmatrix}
+:
+W_1\oplus TW_2
+\;\longrightarrow\;
+T'W_1\oplus W_2,
+\qquad
+P=P_{W_2}.
+\end{equation}
+On \(K=\ell^2(\mathbb{Z},\mathcal{W})\cong L^2(\mathbb{T};\mathcal{W})\) the operators
+\begin{equation}
+\label{eq:BCL}
+\boxed{
+\begin{aligned}
+(U\xi)_n
+&=
+U_{\mathcal{W}}^*\,P\,\xi_n
++
+U_{\mathcal{W}}^*\,P^\perp\,\xi_{n-1},
+\\[1mm]
+(U'\xi)_n
+&=
+P^\perp\,U_{\mathcal{W}}\,\xi_n
++
+P\,U_{\mathcal{W}}\,\xi_{n-1}
+\end{aligned}
+}
+\end{equation}
+are commuting unitaries. Equivalently, \(U=M_{\Phi}\) and \(U'=M_{\Psi}\) where
+\[
+\Phi(z)=U_{\mathcal{W}}^*(P+zP^\perp),
+\qquad
+\Psi(z)=(P^\perp+zP)U_{\mathcal{W}}
+\]
+are unitary-valued for a.e.\ \(z\in\mathbb{T}\). The subspace
+\(H\simeq H^2(\mathcal{W})=\bigoplus_{n\ge 0}\mathcal{W}\) is invariant for both, and
+the restrictions are unitarily equivalent to \(T,T'\) (Berger--Coburn--Lebow).
+
+This uses only commutativity of \(T\) and \(T'\), not double commutativity.
+If \(TT'\) is not pure, split off the maximal unitary part
+\(H_u=\bigcap_{n\ge 0}(TT')^n H\) (which reduces both \(T\) and \(T'\)) and apply
+the above on the pure summand.
+
+\end{document}
