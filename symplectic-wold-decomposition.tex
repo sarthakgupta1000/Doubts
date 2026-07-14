@@ -1,0 +1,571 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{fact}[theorem]{Fact}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\cJ}{J}
+\newcommand{\Om}{\Omega}
+\newcommand{\pO}{\perp_\Omega}
+\newcommand{\pg}{\perp_g}
+\DeclareMathOperator{\ran}{ran}
+\newcommand{\eps}{\varepsilon}
+
+\title{Wold-type decomposition for symplectic maps:\\ wandering space and the $J$-shift}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $H$ be a real Hilbert space with inner product $g$ and a compatible complex structure
+$\cJ$ ($\cJ^2=-I$, $\cJ^*=-\cJ$), giving the strong symplectic form $\Omega(x,y):=g(\cJ x,y)$.
+Let $T$ be a bounded linear map on $H$ preserving $\Omega$. We give a full Wold-type
+decomposition of $H$ relative to $T$ in two regimes. When $T$ is additionally a metric
+isometry, the classical Wold--von Neumann decomposition applies verbatim, and we show that
+$\Omega$, restricted to the shift part, is a block-Toeplitz form whose symbol
+$\Phi_k=P_NJT^k|_N$ (the \emph{$J$-shift symbol}) encodes exactly how $J$ interacts with
+the shift; $\Phi_0$ is the compression of $J$ to the wandering space. When $T$ is only
+$\Omega$-preserving (not an isometry), we show that the symplectic wandering filtration,
+its pairwise $\Omega$-orthogonality, and the residual (``unitary'') part all survive
+unconditionally, while the passage to a convergent Hilbert-space direct sum genuinely
+requires an extra hypothesis; we make this precise via the metric wandering space and the
+class $\mathcal D$ of left-invertible operators of Shimorin and Manolescu, and verify it on
+an explicit non-isometric example.
+\end{abstract}
+
+\tableofcontents
+
+\section{Setup and notation}
+\label{sec:setup}
+
+\begin{itemize}
+\item $(H,g)$ is a real Hilbert space, inner product $g$, norm $\|\cdot\|$.
+\item $\cJ:H\to H$ is bounded linear with $\cJ^2=-I$ and $\cJ^*=-\cJ$. Equivalently
+($\cJ^*\cJ=(-\cJ)\cJ=-\cJ^2=I$) $\cJ$ is $g$-orthogonal: $\|\cJ x\|=\|x\|$ and
+$g(\cJ x,\cJ y)=g(x,y)$ for all $x,y$.
+\item $\Om(x,y):=g(\cJ x,y)$ is the \emph{symplectic form}. It is bounded
+($|\Om(x,y)|\le\|x\|\|y\|$), antisymmetric, and \emph{strong}: the map
+$\flat:x\mapsto\Om(x,\cdot)$ is a Banach-space isomorphism $H\to H^{*}$ (composition of the
+Riesz isomorphism with the isomorphism $\cJ$).
+\item $T:H\to H$ is bounded linear and \emph{$\Om$-preserving}:
+$\Om(Tx,Ty)=\Om(x,y)$ for all $x,y$, equivalently $T^{*}\cJ T=\cJ$.
+\end{itemize}
+
+\begin{lemma}[Basic identities]
+\label{lem:basic}
+$\|\cJ x\|=\|x\|$ for all $x$; and $\Om(Tx,Ty)=\Om(x,y)$ for all $x,y$ if and only if
+$T^{*}\cJ T=\cJ$.
+\end{lemma}
+\begin{proof}
+$\cJ^{*}\cJ=(-\cJ)\cJ=-\cJ^2=I$, so $\|\cJ x\|^2=g(\cJ x,\cJ x)=g(x,\cJ^*\cJ x)=g(x,x)=\|x\|^2$.
+For the second claim, $\Om(Tx,Ty)=g(\cJ Tx,Ty)=g(T^*\cJ Tx,y)$ and $\Om(x,y)=g(\cJ x,y)$; the
+two agree for all $x,y$ iff $T^*\cJ T=\cJ$.
+\end{proof}
+
+\begin{lemma}[Metric/symplectic complement duality]
+\label{lem:duality}
+For every closed subspace $M\subseteq H$,
+\[
+M^{\pO}:=\{v\in H:\Om(v,M)=0\}\;=\;\cJ\big(M^{\pg}\big),\qquad
+M^{\pg}:=\{v\in H:g(v,M)=0\}.
+\]
+\end{lemma}
+\begin{proof}
+$v\in M^{\pO}\iff g(\cJ v,m)=0\ \forall m\in M\iff \cJ v\in M^{\pg}\iff v\in \cJ^{-1}(M^{\pg})$.
+Since $\cJ^2=-I$, $\cJ^{-1}=-\cJ$, and for a linear subspace $S$ we have $-S=S$, so
+$-\cJ(S)=\cJ(-S)=\cJ(S)$. Hence $\cJ^{-1}(M^{\pg})=\cJ(M^{\pg})$, giving the claim.
+\end{proof}
+
+This holds for \emph{any} closed $M$ and uses nothing about $T$: it is the bridge between the
+metric ($g$) and symplectic ($\Om$) notions of complement.
+
+The prototype to keep in mind throughout: $H=\bigoplus_{n\ge1}\R^{2d}$,
+$\cJ=\bigoplus_nJ_0$ ($J_0$ the standard symplectic unit on $\R^{2d}$), and $T=S$ the right
+shift $S(x_1,x_2,\dots)=(0,x_1,x_2,\dots)$.
+
+\section{The case of a symplectic isometry}
+\label{sec:isometric}
+
+Throughout this section $T$ is a \textbf{symplectic isometry}:
+\[
+\|Tx\|=\|x\|\quad\text{and}\quad \Om(Tx,Ty)=\Om(x,y)\qquad\text{for all }x,y\in H,
+\]
+equivalently $T^{*}T=I$ and $T^{*}\cJ T=\cJ$.
+
+\subsection{The metric Wold decomposition of $T$}
+
+This is the classical Wold--von Neumann theorem (Halmos' proof), stated so that
+Section~\ref{sec:jshift} can refer to each step.
+
+\textbf{Range closedness.} $R_1:=TH$ is closed: if $Tx_n\to z$ then
+$\|x_n-x_m\|=\|Tx_n-Tx_m\|\to0$ (isometry), so $x_n\to x$ for some $x\in H$, and $Tx=z$ by
+continuity. The same argument applied to the isometry $T^{n}$ shows $R_n:=T^{n}H$ is closed
+for every $n\ge0$, and $R_{n+1}=T(R_n)\subseteq R_n$ (since $TH\subseteq H$ implies
+$T^n(TH)\subseteq T^n(H)$): a decreasing chain of closed subspaces.
+
+\textbf{Wandering space.} Define
+\[
+N:=H\ominus TH=(TH)^{\pg}=R_1^{\pg},\qquad N_n:=T^{n}N\ (n\ge0),\quad N_0=N.
+\]
+
+\begin{proposition}[W1--W8]
+\label{prop:wold}
+\begin{enumerate}[label=(W\arabic*)]
+\item $T^{n}:N\to N_n$ is a linear isometry onto $N_n$.
+\item $N_n\perp_g R_{n+1}$.
+\item $R_n=R_{n+1}\oplus_g N_n$.
+\item $N_k\perp_g N_l$ for $k\ne l$.
+\item With $H_s:=\overline{\operatorname{span}}\big(\bigcup_{n\ge0}N_n\big)$ and
+$H_\infty:=\bigcap_{n\ge0}R_n$, the map $\Psi:\ell^2(N)\to H_s$,
+$\Psi\big((a_n)_{n\ge0}\big)=\sum_{n\ge0}T^na_n$, is a Hilbert-space isomorphism.
+\item $H=H_s\oplus_g H_\infty$.
+\item $T|_{H_\infty}$ is a surjective isometry (unitary) of $H_\infty$.
+\item $T|_{H_s}$ is the unilateral shift of multiplicity $N$: $T\circ\Psi=\Psi\circ\Sigma$
+where $\Sigma(a_0,a_1,\dots)=(0,a_0,a_1,\dots)$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+(W1) $T^n$ is an isometry (a composition of isometries), hence injective, and it maps the
+closed set $N$ onto the closed set $N_n:=T^nN$ (closed by the same closed-range argument as
+above); by definition $\|T^na\|=\|a\|$ for $a\in N$.
+
+(W2) Let $a\in N,\ r\in R_{n+1}=T^n(TH)$, say $r=T^n(Ts)$. Then
+$g(T^na,r)=g(T^na,T^n(Ts))=g(a,Ts)=0$ (isometry preserves $g$; $a\in N=(TH)^{\pg}$,
+$Ts\in TH$).
+
+(W3) Given $h\in H$, write $h=w+a$ with $w\in TH,\,a\in N$ (projection theorem, $TH$
+closed). Apply $T^n$: $T^nh=T^nw+T^na$, with $T^nw\in T^n(TH)=R_{n+1}$ and $T^na\in N_n$. So
+$R_n\subseteq R_{n+1}+N_n$; combined with (W2) this is the orthogonal decomposition
+$R_n=R_{n+1}\oplus_g N_n$.
+
+(W4) If $l>k$ then $N_l\subseteq R_l\subseteq R_{k+1}$ (decreasing chain), and
+$N_k\perp_gR_{k+1}$ by (W2); hence $N_k\perp_gN_l$.
+
+(W5) $\Psi$ is linear and onto by definition of $H_s$, and it is an isometry by the
+Pythagorean theorem: $\|\Psi(a)\|^2=\sum_n\|T^na_n\|^2=\sum_n\|a_n\|^2$ (using (W1),(W4)).
+
+(W6) \emph{Orthogonality}: for $a\in N_n$ and $h\in H_\infty\subseteq R_{n+1}$, (W2) gives
+$a\perp h$; this holds for every $n$, so $H_s\perp_gH_\infty$. \emph{Spanning}: fix $h\in H$.
+Iterating (W3), for every $n$ there are unique $a_0,\dots,a_{n-1}\in N$ and $h_n\in R_n$ with
+$h=h_n+\sum_{k<n}a_k$, and uniqueness of the orthogonal decomposition (W3) shows the $a_k$ do
+not change as $n$ grows. Since the $a_k$ are pairwise orthogonal,
+$\sum_{k<n}\|a_k\|^2=\|h\|^2-\|h_n\|^2\le\|h\|^2$, so $\sum_k\|a_k\|^2<\infty$; put
+$a:=\sum_kT^ka_k\in H_s$. Then $h_n=h-\sum_{k<n}a_k\to h-a=:h_\infty$. For fixed $m$ and all
+$n\ge m$, $h_n\in R_n\subseteq R_m$ (closed), so $h_\infty\in R_m$; as $m$ was arbitrary,
+$h_\infty\in\bigcap_mR_m=H_\infty$. Thus $h=a+h_\infty\in H_s+H_\infty$.
+
+(W7) \emph{Invariance}: $T(H_\infty)=T(\bigcap_nR_n)\subseteq\bigcap_nT(R_n)=\bigcap_nR_{n+1}=H_\infty$.
+\emph{Onto}: let $h\in H_\infty$. Since $h\in R_1=TH$, there is (by global injectivity of $T$)
+a unique $x\in H$ with $Tx=h$. For each $n$, $h\in R_{n+1}=T(R_n)$, so $h=Ty$ for some
+$y\in R_n$; by uniqueness of the preimage, $y=x$, hence $x\in R_n$. As $n$ was arbitrary,
+$x\in\bigcap_nR_n=H_\infty$ and $Tx=h$. So $T(H_\infty)=H_\infty$, and $T|_{H_\infty}$, being
+an isometry onto itself, is unitary.
+
+(W8) $\Psi(0,a_0,a_1,\dots)=\sum_{n\ge1}T^na_{n-1}=T\big(\sum_{n\ge0}T^na_n\big)=T\Psi(a_0,a_1,\dots)$,
+i.e. $T\circ\Psi=\Psi\circ\Sigma$.
+\end{proof}
+
+\begin{theorem}[Wold decomposition]
+\label{thm:A}
+$H=H_s\oplus_gH_\infty$, both summands reduce $T$, $T|_{H_\infty}$ is unitary, and
+$T|_{H_s}\cong\Sigma\otimes I_N$ is a unilateral shift with wandering space $N=H\ominus TH$.
+\end{theorem}
+
+Nothing here has used $\Om$ or $\cJ$ yet. They enter now.
+
+\subsection{Where $\cJ$ enters: the symplectic defect and the $J$-shift symbol}
+\label{sec:jshift}
+
+By Lemma~\ref{lem:duality} with $M=R_1=TH$,
+\[
+R_1^{\pO}=\cJ\big(R_1^{\pg}\big)=\cJ(N).
+\]
+More generally, since (W3)/(W4) give $R_n^{\pg}=\bigoplus_{k<n}N_k$ (finite $g$-orthogonal
+sum, complement of $R_n$ in $H$), Lemma~\ref{lem:duality} gives, for every $n$,
+\[
+R_n^{\pO}=\cJ\Big(\bigoplus_{k<n}N_k\Big)=\bigoplus_{k<n}\cJ(N_k),
+\]
+the last equality because $\cJ$ preserves $g$, hence preserves orthogonality. So
+\emph{the symplectic wandering space $R_1^{\pO}$ of $T$ is $\cJ(N)$, not $N$ itself}: the
+metric wandering space and the symplectic defect space of $TH$ coincide up to the fixed
+rotation $\cJ$.
+
+For $a,b\in N$ and $k\ge0$ define the bounded bilinear form
+\[
+\varphi_k(a,b):=\Om(T^{k}a,b)=g(\cJ T^ka,b),
+\]
+equivalently the bounded operator
+\[
+\Phi_k:=P_N\,\cJ\,T^{k}\big|_N:N\to N,\qquad g(\Phi_ka,b)=\varphi_k(a,b),
+\]
+where $P_N$ is the $g$-orthogonal projection of $H$ onto $N$. Since $\cJ$ and $T^{k}$ are
+both $g$-isometries, $\|\Phi_k\|\le1$ for every $k\ge0$; in particular $\Phi_0=P_N\cJ|_N$ is
+the \emph{compression of $\cJ$ to the wandering space}.
+
+\begin{lemma}[Reduction]
+\label{lem:reduction}
+For $a,b\in N$ and $n\ge m\ge0$, $\Om(T^na,T^mb)=\varphi_{n-m}(a,b)$.
+\end{lemma}
+\begin{proof}
+Preservation of $\Om$ by $T$ iterated $m$ times gives $\Om(T^mx,T^my)=\Om(x,y)$ for all
+$x,y\in H$. Take $x=T^{n-m}a,\ y=b$:
+$\Om(T^na,T^mb)=\Om(T^m(T^{n-m}a),T^mb)=\Om(T^{n-m}a,b)=\varphi_{n-m}(a,b)$.
+\end{proof}
+
+By antisymmetry of $\Om$, for $n<m$: $\Om(T^na,T^mb)=-\Om(T^mb,T^na)=-\varphi_{m-n}(b,a)$.
+
+\begin{theorem}[The $J$-shift form of $\Om$]
+\label{thm:B}
+Under the isomorphism $\Psi:\ell^2(N)\to H_s$ of (W5), for
+$a=(a_n)_{n\ge0},\,b=(b_n)_{n\ge0}\in\ell^2(N)$,
+\[
+\Om\big(\Psi a,\Psi b\big)=\sum_{k\ge0}\sum_{m\ge0}\varphi_k(a_{m+k},b_m)\ -\
+\sum_{k\ge1}\sum_{n\ge0}\varphi_k(b_{n+k},a_n),
+\]
+where both double series are the (well-defined) values of
+$\lim_{N,M\to\infty}\sum_{n=0}^{N}\sum_{m=0}^{M}\Om(T^na_n,T^mb_m)$, which exists and equals
+$\Om(\Psi a,\Psi b)$ because $\Om$ is a bounded (hence jointly continuous) bilinear form and
+$\Psi a=\lim_N\sum_{n\le N}T^na_n$, $\Psi b=\lim_M\sum_{m\le M}T^mb_m$ in norm.
+\end{theorem}
+\begin{proof}
+Split the finite double sum $\sum_{n\le N,m\le M}\Om(T^na_n,T^mb_m)$ into $n\ge m$ and $n<m$
+and apply Lemma~\ref{lem:reduction} to each term; let $N,M\to\infty$ and substitute
+$k=n-m$ (resp.\ $k=m-n$).
+\end{proof}
+
+We call the operator sequence $(\Phi_k)_{k\ge0}$, $\Phi_k=P_N\cJ T^k|_N$, the
+\textbf{$J$-shift symbol of $T$}: it is exactly the extra data (beyond the shift $\Sigma$
+itself) needed to reconstruct $\Om$ on the pure-shift part $H_s$. Theorem~\ref{thm:B} says
+$\Om|_{H_s}$ is a \emph{block-Toeplitz form} with that symbol.
+
+\begin{corollary}
+$\varphi_0(a,b)=\Om(a,b)$, i.e.\ $\Om|_N$ is recovered from the symbol at $k=0$.
+\end{corollary}
+
+\begin{example}[The prototype has trivial symbol]
+For $H=\bigoplus_{n\ge1}\R^{2d}$, $\cJ=\bigoplus_nJ_0$, $T=S$ the right shift: $N=$ the
+first block, $N_n=$ the $(n{+}1)$-st block, $H_\infty=\bigcap_nS^nH=\{0\}$ ($S$ is a
+\emph{pure} shift). For $a\in N$, $S^{k}a$ lives entirely in block $k+1$; since $\cJ$ is
+block-diagonal, $\cJ S^{k}a$ also lives entirely in block $k+1$, so $P_N(\cJ S^ka)=0$ for
+$k\ge1$ and $P_N(\cJ a)=J_0a$ for $k=0$. Hence
+\[
+\Phi_0=J_0,\qquad \Phi_k=0\ (k\ge1):
+\]
+the symbol is trivial, and Theorem~\ref{thm:B} collapses to
+$\Om(\Psi a,\Psi b)=\sum_{n\ge0}g(J_0a_n,b_n)$ --- the blocks are $\Om$-orthogonal to each
+other, not just $g$-orthogonal. This is special to $\cJ$ being \emph{adapted} to the shift's
+block structure. In general $\Phi_k\ne0$ for $k\ge1$ measures the failure of $\cJ$ to be
+adapted to the filtration $R_0\supseteq R_1\supseteq\cdots$ generated by $T$.
+\end{example}
+
+\begin{remark}
+Only \S\ref{sec:isometric} needs $T^{*}T=I$: it gives the Pythagorean identity that makes
+$H_s$ an orthogonal (not merely topological) direct sum and makes $\Phi_k$ uniformly
+bounded. If $T$ commutes with $\cJ$ (complex-linear), $\Om$-preservation is \emph{automatic}
+from isometry alone: $\Om(Tx,Ty)=g(\cJ Tx,Ty)=g(T\cJ x,Ty)=g(\cJ x,y)=\Om(x,y)$. The
+interesting case, where the symbol $(\Phi_k)_{k\ge1}$ can be nonzero, is precisely when $T$
+is a \emph{real} (non-complex-linear) symplectic isometry: from $T^{*}\cJ T=\cJ$ and
+$TT^{*}=P_{TH}$ one gets $T\cJ=P_{TH}(\cJ T)$, i.e.\ $\cJ T-T\cJ$ takes values in
+$N=(TH)^{\pg}$ --- a defect operator $\delta(x):=\cJ Tx-T\cJ x\in N$ measuring the
+noncommutativity that feeds the nonzero symbol terms. Finally, $H_\infty$ is again a
+symplectic Hilbert space and $T|_{H_\infty}$ is a \textbf{symplectic unitary} (metrically
+unitary and $\Om$-preserving).
+\end{remark}
+
+\section{The general case: $T$ need not be an isometry}
+\label{sec:general}
+
+We now drop the isometry hypothesis entirely: $T$ is bounded and $\Om$-preserving only.
+
+\begin{example}[A genuinely non-isometric symplectic map]
+\label{ex:running}
+Take $d=1$, $J_0=\begin{pmatrix}0&-1\\1&0\end{pmatrix}$ on $\R^2$ (so
+$\Om_0(u,v)=u_1v_2-u_2v_1$), fix $\lambda>1$, and let $T_0:=\operatorname{diag}(\lambda,\lambda^{-1})$.
+Since $\det T_0=1$, $T_0$ is symplectic ($\Om_0(T_0u,T_0v)=\Om_0(u,v)$) but not orthogonal
+($\|T_0e_1\|=\lambda\ne1$). Put $H=\bigoplus_{n\ge1}\R^2$, $\cJ=\bigoplus_nJ_0$, and
+\[
+T(x_1,x_2,x_3,\dots):=(0,T_0x_1,T_0x_2,\dots)
+\]
+(a ``matrix-weighted shift''). Then
+$\Om(Tx,Ty)=\sum_ng(J_0T_0x_n,T_0y_n)=\sum_n\Om_0(T_0x_n,T_0y_n)=\sum_n\Om_0(x_n,y_n)=\Om(x,y)$:
+$T$ preserves $\Om$. But $\|Tx\|^2=\sum_n\|T_0x_n\|^2\ne\sum_n\|x_n\|^2=\|x\|^2$ in general:
+$T$ is not an isometry. We compute everything on this example as we go.
+\end{example}
+
+\subsection{Three facts that use no isometry}
+
+The following are proved by a direct dilation/complement argument (Step~1--3 of the
+one-step extension construction; see Remark~\ref{rem:cite} for provenance) using only
+boundedness and $\Om$-preservation.
+
+\begin{fact}[Bounded below]
+\label{fact:1}
+$\|Tx\|\ge c\|x\|$ for all $x$, with $c:=1/\|T\|$. Hence $T$ is injective and $R_1:=TH$ is
+closed.
+\end{fact}
+\begin{proof}
+By Lemma~\ref{lem:basic}, $\|x\|=\|\cJ x\|=\|T^*\cJ Tx\|\le\|T\|\|\cJ Tx\|=\|T\|\|Tx\|$, so
+$\|Tx\|\ge\|x\|/\|T\|$. If $Tx_n\to z$ then $(x_n)$ is Cauchy (by the bound applied to
+$x_n-x_m$), so $x_n\to x$ and $Tx=z$ by continuity; hence $R_1$ is closed.
+\end{proof}
+
+\begin{fact}[Strength is inherited]
+\label{fact:2}
+$\Om|_{R_1}$ is again a strong symplectic form.
+\end{fact}
+
+\begin{fact}[One-step complement]
+\label{fact:3}
+$H=R_1\oplus N_0$ (a topological, bounded-idempotent direct sum --- not $g$-orthogonal),
+where $N_0:=R_1^{\pO}=\{v:\Om(v,R_1)=0\}$, $\Om(R_1,N_0)=0$, $(N_0,\Om|_{N_0})$ is strong
+symplectic, and $T:H\to R_1$ is a bijective, bounded-both-ways symplectomorphism.
+\end{fact}
+
+\begin{remark}
+\label{rem:cite}
+Facts~\ref{fact:1}--\ref{fact:3} are the symplectic analogue of dilating a Hilbert-space
+isometry to a unitary; $N_0$ plays the role of the defect space, and $E:=B^{-1}P_{R_1}\cJ$
+(with $B:=P_{R_1}\cJ|_{R_1}$) is the bounded idempotent onto $R_1$ with kernel $N_0$.
+\end{remark}
+
+In Example~\ref{ex:running}: $R_1=\{(0,y_1,y_2,\dots)\}$ (since $T_0$ is invertible), and
+$N_0=R_1^{\pO}=\cJ(R_1^{\pg})$ (Lemma~\ref{lem:duality}, no isometry needed) equals
+$J_0(\text{first block})=\text{first block}$, since $J_0$ maps the first $\R^2$ block to
+itself.
+
+\subsection{The $\Om$-wandering filtration}
+
+Define $R_n:=T^nH$ ($R_0=H$).
+
+\begin{proposition}
+\label{prop:filtration}
+For every $n\ge0$: $R_n$ is closed, $R_{n+1}\subseteq R_n$, $\Om|_{R_n}$ is strong, and
+$T:R_n\to R_{n+1}$ is a bijective, bounded-both-ways symplectomorphism, with
+$\|Tx\|\ge c\|x\|$ on $R_n$ using the same constant $c=1/\|T\|$ as on all of $H$.
+\end{proposition}
+\begin{proof}
+By induction on $n$; $n=0$ is Facts~\ref{fact:1}--\ref{fact:3}. Assume the statement at $n$.
+Then $R_{n+1}=T(R_n)\subseteq R_n$ (also seen directly, by induction, from
+$R_1\subseteq R_0=H$ and $R_n\subseteq R_{n-1}\Rightarrow T(R_n)\subseteq T(R_{n-1})$). So
+$T$ restricts to a bounded, $\Om|_{R_n}$-preserving self-map of the strong symplectic space
+$(R_n,\Om|_{R_n})$. Since $\|T|_{R_n}\|\le\|T\|$, Fact~\ref{fact:1}'s bound
+$\|Tx\|\ge\|x\|/\|T|_{R_n}\|$ gives $\|Tx\|\ge c\|x\|$ on $R_n$; the closed-range argument
+gives $R_{n+1}$ closed; the bijectivity argument gives $T:R_n\to R_{n+1}$
+bounded-both-ways; and Fact~\ref{fact:2} gives $\Om|_{R_{n+1}}$ strong.
+\end{proof}
+
+Define, via Fact~\ref{fact:3} applied to $(R_n,\Om|_{R_n})$ and the self-map $T|_{R_n}$,
+\[
+N_n:=\{v\in R_n:\Om(v,R_{n+1})=0\},\qquad R_n=R_{n+1}\oplus N_n\ \ (\Om(R_{n+1},N_n)=0).
+\]
+
+\begin{proposition}
+\label{prop:Nfiltration}
+\begin{enumerate}[label=(\alph*)]
+\item $T(N_n)=N_{n+1}$, bijectively and bounded both ways.
+\item $N_n=T^n(N_0)$, and $T^n|_{N_0}:N_0\to N_n$ is a bijective, bounded-both-ways,
+$\Om$-preserving isomorphism (a symplectomorphism, not a metric isometry in general).
+\item $\Om(N_j,N_k)=0$ for all $j\ne k$ (full pairwise $\Om$-orthogonality).
+\item For every $n$: $H=R_n\oplus N_{n-1}\oplus\cdots\oplus N_0$ (topological internal
+direct sum).
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+(a) \emph{$T(N_n)\subseteq N_{n+1}$}: let $v\in N_n$, so $v\in R_n$ and $\Om(v,R_{n+1})=0$.
+Then $Tv\in T(R_n)=R_{n+1}$. For any $t\in R_{n+2}=T(R_{n+1})$, write $t=Ts'$ with
+$s'\in R_{n+1}$; then $\Om(Tv,t)=\Om(Tv,Ts')=\Om(v,s')=0$ ($T$ preserves $\Om$; $s'\in R_{n+1}$
+and $v\pO R_{n+1}$). So $\Om(Tv,R_{n+2})=0$, i.e.\ $Tv\in N_{n+1}$.
+
+\emph{$N_{n+1}\subseteq T(N_n)$}: let $w\in N_{n+1}\subseteq R_{n+1}=T(R_n)$. By bijectivity
+of $T:R_n\to R_{n+1}$ there is a unique $v\in R_n$ with $Tv=w$; write $v=r+\nu$ with
+$r\in R_{n+1},\ \nu\in N_n$ (unique decomposition, Fact~\ref{fact:3} at level $n$). Then
+\[
+w=Tv=Tr+T\nu,\qquad Tr\in T(R_{n+1})=R_{n+2},\qquad T\nu\in T(N_n)\subseteq N_{n+1}
+\]
+(the last inclusion by the direction just proved). But $R_{n+1}=R_{n+2}\oplus N_{n+1}$
+(Fact~\ref{fact:3} at level $n{+}1$) is also a unique decomposition, and $w\in N_{n+1}$
+means $w=0+w$ is \emph{its} decomposition into an $R_{n+2}$-part ($0$) and an $N_{n+1}$-part
+($w$). Comparing forces $Tr=0$ and $T\nu=w$; since $T$ is injective, $r=0$, so
+$v=\nu\in N_n$ and $Tv=w$. Hence $w\in T(N_n)$.
+
+So $T(N_n)=N_{n+1}$; this restriction of the bijection $T:R_n\to R_{n+1}$ is itself
+bijective and bounded both ways.
+
+(b) Immediate by induction from (a).
+
+(c) Say $j>k$; then $N_j=T^j(N_0)\subseteq T^jH=R_j\subseteq R_{k+1}$ (decreasing chain, as
+$j\ge k+1$), and $\Om(N_k,R_{k+1})=0$ by definition of $N_k$; hence $\Om(N_k,N_j)=0$, and
+$\Om(N_j,N_k)=-\Om(N_k,N_j)=0$.
+
+(d) Iterate Fact~\ref{fact:3}'s decomposition $R_k=R_{k+1}\oplus N_k$ for $k=0,\dots,n-1$.
+\end{proof}
+
+In Example~\ref{ex:running}: $N_n=T^n(\text{first block})=\{(0,\dots,0,T_0^na,0,\dots):a\in\R^2\}$
+sitting in block $n+1$; part (c) holds trivially since different blocks are already
+$g$-orthogonal (hence $\Om$-orthogonal, as $\Om$ is block-diagonal too).
+
+\subsection{The residual space $H_\infty$}
+
+\[
+H_\infty:=\bigcap_{n\ge0}R_n.
+\]
+
+\begin{theorem}
+\label{thm:Hinfty}
+$T(H_\infty)=H_\infty$, and $T|_{H_\infty}$ is a bounded bijection with bounded inverse ---
+a \emph{symplectic automorphism} of $(H_\infty,\Om|_{H_\infty})$, not necessarily
+metrically unitary.
+\end{theorem}
+\begin{proof}
+$T(H_\infty)=T(\bigcap_nR_n)\subseteq\bigcap_nT(R_n)=\bigcap_nR_{n+1}=H_\infty$. For
+surjectivity: let $h\in H_\infty\subseteq R_1=TH$. Because $T$ is globally injective
+(Fact~\ref{fact:1}), there is a unique $x\in H$ with $Tx=h$. Fix $n$; since
+$h\in R_{n+1}=T(R_n)$, there is $y\in R_n$ with $Ty=h$; by global injectivity $y=x$, so
+$x\in R_n$. As $n$ was arbitrary, $x\in\bigcap_nR_n=H_\infty$, and $Tx=h$. So
+$T(H_\infty)=H_\infty$. Boundedness of $T^{-1}$ on $H_\infty$ follows from
+Fact~\ref{fact:1}'s global bound restricted to $H_\infty$: $\|T^{-1}h\|\le\|h\|/c$.
+\end{proof}
+
+Nothing here used isometry --- only injectivity and the bounded-below estimate, both free
+consequences of $\Om$-preservation. In Example~\ref{ex:running},
+$H_\infty=\bigcap_nR_n=\{0\}$: $R_n$ is exactly ``supported in blocks $>n$,'' and no nonzero
+vector is supported past every finite block.
+
+\subsection{Where isometry was really needed}
+
+Combining \S\ref{sec:general}.2--\ref{sec:general}.3: for every finite $n$ we have the
+decomposition (d) of Proposition~\ref{prop:Nfiltration}, and $H_\infty$ sits inside every
+$R_n$. The missing statement, compared to Theorem~\ref{thm:A}, is the infinite one:
+\[
+H\ \overset{?}{=}\ H_\infty\ \oplus\ \Big\{\textstyle\sum_{n\ge0}T^na_n: a_n\in N_0,\
+\textstyle\sum_n\|a_n\|^2<\infty\Big\}.
+\]
+The isometric proof of this used $\|T^na\|=\|a\|$ in two places: (i) to get the Pythagorean
+identity $\|\sum_{n<K}T^na_n\|^2=\sum_{n<K}\|a_n\|^2$, which needs the pieces to be
+$g$-orthogonal, not just $\Om$-orthogonal; and (ii) to make the resulting map
+$\Psi:\ell^2(N_0)\to H$ bounded. Without isometry we only have
+\[
+c^n\|a\|\ \le\ \|T^na\|\ \le\ \|T\|^n\|a\|\qquad(a\in N_0),
+\]
+and no control on $g(T^na,T^mb)$ for $a,b\in N_0,\ n\ne m$ --- only on $\Om(T^na,T^mb)$
+(Prop.~\ref{prop:Nfiltration}(c)). So $\sum_nT^na_n$ need not converge for a general
+square-summable $(a_n)$.
+
+\begin{example}[Concrete failure]
+Take $a_n:=(1/n)\,e_1\in N_0\cong\R^2$ ($n\ge1$; a genuinely $\ell^2$ sequence). Then
+$T^na_n$ lives in block $n+1$ with value $T_0^na_n=(\lambda^n/n)e_1$, so
+$\|T^na_n\|=\lambda^n/n\to\infty$: the partial sums $\sum_{n\le K}T^na_n$ are not even
+bounded, let alone convergent.
+\end{example}
+
+\subsection{Recovering an honest infinite decomposition: go metric, not symplectic}
+
+The fix (Richter, Shimorin, and --- closest to what we need --- Manolescu \cite{manolescu2022})
+is to build the wandering space out of the \emph{metric} ($g$-)orthogonal complement instead
+of the symplectic one, because $g$-orthogonal projections are automatically bounded by $1$
+regardless of how much $T$ distorts norms.
+
+\textbf{Left invertibility.} $T$ bounded below (Fact~\ref{fact:1}) $\iff$ $T^{*}T$ invertible
+$\iff$ $T$ has a bounded left inverse $T^{-}:=(T^{*}T)^{-1}T^{*}$ (so $T^{-}T=I$); a general
+Hilbert-space fact, here a consequence of $\Om$-preservation.
+
+\textbf{Metric wandering space.} $W:=H\ominus TH=\ker T^{*}$. By Lemma~\ref{lem:duality}
+(no isometry needed),
+\[
+N_0=R_1^{\pO}=\cJ\big(R_1^{\pg}\big)=\cJ(W).
+\]
+So the base-level relation between the metric and symplectic wandering spaces is
+unconditional: $N_0=\cJ(W)$, always. (At higher levels $N_n=T^n(N_0)$ and $T^nW$ need not
+correspond simply through $\cJ$ unless $T\cJ=\cJ T$ on the relevant subspaces.)
+
+\textbf{The class $\mathcal D$ condition.} Following Manolescu (adapting Shimorin
+\cite{shimorin2001}), say $T\in\mathcal D$ if
+\[
+(T^{n})^{-}=(T^{-})^{n}\qquad\text{for all }n\ge2.
+\]
+This holds automatically if $T$ is an isometry ($T^-=T^*$, trivially); it also holds for
+every bounded-below weighted shift with weights bounded away from $0$ and $\infty$, and
+more generally for direct sums of operators in $\mathcal D$ acting on $g$-orthogonal
+summands.
+
+\begin{theorem}[Manolescu 2022, Thm.\ 2.9--2.10, restated]
+\label{thm:manolescu}
+If $T\in\mathcal D$, then $P_n:=T^{n}(T^{-})^{n}$ is the $g$-orthogonal projection onto
+$R_n=T^nH$; $P_n$ converges strongly to the orthogonal projection $P_\infty$ onto
+$H_\infty=\bigcap_nR_n$; and
+\[
+H\ =\ H_\infty\ \oplus_g\ H_s,\qquad H_s:=\overline{\bigoplus_{n\ge0}}{}^{\,g}\,T^{n}W,
+\]
+a genuine ($g$-)orthogonal Hilbert-space direct sum, with $H_\infty,H_s$ reducing $T$ and
+$T|_{H_\infty}$ bijective. In general $T|_{H_s}$ is only a bounded-below, bounded-above
+per-summand map $T^nW\to T^{n+1}W$ --- a \emph{weighted} shift, not literally conjugate to
+$\Sigma\otimes I_W$ via an isometry.
+\end{theorem}
+
+\begin{example}[Example~\ref{ex:running} is in $\mathcal D$]
+In standard per-block coordinates $x=(x^{(1)},x^{(2)})$, the diagonal
+$T_0=\operatorname{diag}(\lambda,\lambda^{-1})$ makes $H=\bigoplus_n\R^2$ split
+$g$-orthogonally as $H=\ell^2_{(1)}\oplus_g\ell^2_{(2)}$, and
+$T=T^{(1)}\oplus T^{(2)}$ where $T^{(i)}$ is the scalar weighted shift with constant weight
+$\lambda$ (resp.\ $\lambda^{-1}$). Each constant-weight scalar shift is in $\mathcal D$
+(direct computation), hence so is their $g$-orthogonal direct sum $T$. Theorem~\ref{thm:manolescu}
+then gives $H=H_\infty\oplus_gH_s$ with $H_\infty=\{0\}$, so $H_s=H$: the exhaustion by
+full blocks $T^nW$ is genuinely orthogonal, even though the per-summand map
+$T^nW\to T^{n+1}W$ scales the two eigen-components by wildly different factors
+($\lambda^{\pm1}$ each step).
+\end{example}
+
+\subsection{The Toeplitz / $J$-shift symbol still makes sense}
+
+Nothing in Lemma~\ref{lem:reduction} used isometry --- only $\Om$-preservation, iterated.
+So, verbatim: for $a,b\in N_0$ and $k\ge0$, set
+$\varphi_k(a,b):=\Om(T^ka,b)=g(\cJ T^ka,b)$, $\Phi_k:=P_{N_0}\cJ T^k|_{N_0}$; then for
+$n\ge m$: $\Om(T^na,T^mb)=\varphi_{n-m}(a,b)$, and for finite combinations this reproduces
+the same block-Toeplitz expression as Theorem~\ref{thm:B}, term by term, with the weaker
+bound $\|\Phi_k\|\le\|\cJ\|\,\|T^k|_{N_0}\|\le\|T\|^k$ (instead of $\le1$). In
+Example~\ref{ex:running}, the identical computation gives $\Phi_0=J_0$, $\Phi_k=0$
+($k\ge1$), regardless of $\lambda$: the symbol does not ``see'' the non-isometry here,
+because the distortion acts entirely within each $\Om$-orthogonal block.
+
+\subsection{Summary}
+
+\begin{center}
+\begin{tabular}{p{6.7cm}p{3.1cm}p{3.6cm}}
+\toprule
+ & \textbf{$T$ isometric} & \textbf{$T$ only $\Om$-preserving} \\
+\midrule
+Bounded below, closed range, $H=R\oplus N_0$ & unconditional & unconditional \\
+$\Om$-filtration $N_n=T^nN_0$, pairwise $\Om(N_j,N_k)=0$ & yes & unconditional (\S\ref{sec:general}.2) \\
+$H_\infty$: $T$ bijective, bdd.\ inverse there & yes & unconditional (\S\ref{sec:general}.3) \\
+Reduction formula $\Om(T^na,T^mb)=\varphi_{n-m}(a,b)$ & yes & unconditional (\S\ref{sec:general}.6) \\
+$H=H_\infty\oplus^gH_s$, convergent $\ell^2$-sum, $T|_{H_s}\cong\Sigma\otimes I$ & automatic & only if $T\in\mathcal D$; then $g$- (not $\Om$-)orthogonal pieces, $T|_{H_s}$ a weighted shift \\
+Symbol bound $\|\Phi_k\|\le1$ & yes & no ($\le\|T\|^k$ only) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{thebibliography}{9}
+\bibitem{shimorin2001} S.~Shimorin, \emph{Wold-type decompositions and wandering
+subspaces for operators close to isometries}, J. Reine Angew. Math. \textbf{531} (2001),
+147--189.
+\bibitem{manolescu2022} L.~Manolescu, \emph{Wold decomposition for operators close [to]
+isometries}, Sci. Bull. Politeh. Univ. Timi\c{s}oara, Trans. Math. Phys. (2022).
+\end{thebibliography}
+
+\end{document}
