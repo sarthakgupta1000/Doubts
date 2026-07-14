@@ -20,6 +20,10 @@ one‑step complement $H=R\oplus N$ topologically; the present note upgrades to 
 countable Wold decomposition once $T$ is also metrically isometric, and analyzes how
 $J$ interacts with it.
 
+*If $T$ is not assumed to be an isometry, see `symplectic-wold-decomposition-general.md`,
+which shows exactly which parts of the construction below survive unconditionally and
+which require an extra hypothesis (and why).*
+
 ---
 
 ## 0. Setup and notation
